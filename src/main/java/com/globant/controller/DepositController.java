@@ -9,8 +9,7 @@ import com.globant.view.ConsoleView;
 import java.math.BigDecimal;
 
 public class DepositController implements ControllerExecuteInterface {
-    private  ConsoleView view;
-
+    private final ConsoleView view;
 
     public DepositController( ConsoleView view) {
         this.view = view;
@@ -23,10 +22,9 @@ public class DepositController implements ControllerExecuteInterface {
         BigDecimal Amount = view.DepositView();
         try
         {
-
             UserWallet wallet = UserSingleton.getInstance().getCurrentWallet();
             wallet.deposit(Amount);
-            view.showSuccessMessage("El nuevo saldo de tu billetera es: " + wallet.getBalance());
+            view.showSuccessMessage("Your new wallet balance is: " + wallet.getBalance());
 
         } catch (UnknownUserException e) {
             view.showError("Deposit ERROR");

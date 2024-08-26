@@ -7,9 +7,9 @@ import java.math.BigDecimal;
 
 public class CryptoUserController {
 
-    private  ConsoleView view;
-    private  DepositController depositController;
-    private  ShowBalanceController showBalanceController;
+    private  final ConsoleView view;
+    private  final DepositController depositController;
+    private  final ShowBalanceController showBalanceController;
 
 
     public CryptoUserController(ConsoleView view) {

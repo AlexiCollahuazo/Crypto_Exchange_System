@@ -9,14 +9,11 @@ import com.globant.view.ConsoleView;
 public class LoginController implements ControllerExecuteInterface {
     private final ConsoleView view;
     private final UserAuthentication userauthn;
-    private CryptoUserController cryptocontroller;
-    private MenuUserController userController;
-    private User currentUser;
+    private final CryptoUserController cryptocontroller;
 
     public LoginController(ConsoleView view, UserAuthentication userauthn) {
         this.view = view;
         this.userauthn = userauthn;
-        this.userController = userController;
         this.cryptocontroller = new CryptoUserController(view);
     }
 
@@ -27,13 +24,12 @@ public class LoginController implements ControllerExecuteInterface {
             if (user != null) {
                UserSingleton.getInstance().setCurrentUser(user);
                 view.showSuccessMessage("Login successful");
-
                 cryptocontroller.run();
             } else {
                 view.showError("Incorrect email or password, please try again");
             }
         } catch (UnknownUserException e) {
-            view.showError("WRONG LOGIN");
+            view.showError("Login Error");
 
         }
     }

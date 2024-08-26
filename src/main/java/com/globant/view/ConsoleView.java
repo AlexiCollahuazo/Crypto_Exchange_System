@@ -69,13 +69,6 @@ public class ConsoleView {
         return money;
     }
 
- /*   public BigDecimal BalanceView() {
-        final Scanner scanner = new Scanner(System.in);
-        System.out.print("Please state the amount you are going to deposit: ");
-        BigDecimal money = scanner.nextBigDecimal();
-        return money;
-    }
-*/
     public String[] getLoginView() {
         final Scanner scanner = new Scanner(System.in);
         System.out.print("Please enter your email: ");
@@ -95,12 +88,6 @@ public class ConsoleView {
             System.out.println(crypto.getType() + ": $" + crypto.getPrice() + " USD, AVAILABLE: " + crypto.getAmount());
         }
     }
-
-
-
-
-
-
 
     public void showLogoutMessage(String Message) {
         System.out.println(ANSI_RED + Message + ANSI_RESET);

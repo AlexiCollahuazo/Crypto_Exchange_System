@@ -19,16 +19,16 @@ import com.globant.view.ConsoleView;
          try
          {
              if (userauthn.VerifyEmail(details[1])) {
-             view.showError("EMAIL REGISTERED, TRY ANOTHER ONE");
+             view.showError("Email Registered, Try another One");
              } else {
 
              User user = new User(details[0], details[1], details[2]);
              userauthn.registerUser(user);
              view.showUserId(user.getID());
-             view.showSuccessMessage("USER CORRECTLY");
+             view.showSuccessMessage("User Registered Successfully");
          }
       } catch (UnknownUserException e) {
-          view.showError("WRONG REGISTER");
+          view.showError("Error in registration");
 
       }
 

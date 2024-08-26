@@ -14,8 +14,6 @@ public class ShowBalanceController implements ControllerExecuteInterface {
         this.view = view;
     }
 
-
-
     public void execute() {
         try
         {

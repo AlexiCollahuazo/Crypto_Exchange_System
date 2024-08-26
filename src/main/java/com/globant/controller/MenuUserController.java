@@ -10,11 +10,9 @@ import java.util.Map;
 public class MenuUserController {
 
     private final ConsoleView view;
-    private UserAuthentication userauthn;
    private final RegisterController registerController;
    private final LoginController loginController;
    private boolean active;
-//    private Map<Integer, User> users;
 
 
     public MenuUserController(ConsoleView view, UserAuthentication userauthn) {
@@ -22,8 +20,6 @@ public class MenuUserController {
        this.registerController = new RegisterController(view, userauthn);
        this.loginController = new LoginController(view, userauthn);
        this.active = true;
-      // this.users = new HashMap<>();
-
     }
 
     public void run() {
