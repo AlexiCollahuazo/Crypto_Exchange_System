@@ -15,9 +15,6 @@ public class DepositController implements ControllerExecuteInterface {
         this.view = view;
     }
 
-
-
-
     public void execute() {
         BigDecimal Amount = view.DepositView();
         try
@@ -27,7 +24,7 @@ public class DepositController implements ControllerExecuteInterface {
             view.showSuccessMessage("Your new wallet balance is: " + wallet.getBalance());
 
         } catch (UnknownUserException e) {
-            view.showError("Deposit ERROR");
+            view.showError("Deposit error");
 
         }
 

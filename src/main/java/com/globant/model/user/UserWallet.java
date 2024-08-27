@@ -29,6 +29,7 @@ public class UserWallet {
     public void deposit(BigDecimal amount) {
             this.Balance = Balance.add(amount);
 
+
     }
 
 

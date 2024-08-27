@@ -1,6 +1,7 @@
 package com.globant.view;
 
 import com.globant.model.user.Cryptocurrencies;
+import com.globant.service.UnknownUserException;
 
 import java.math.BigDecimal;
 import java.util.InputMismatchException;
@@ -63,10 +64,22 @@ public class ConsoleView {
     }
 
     public BigDecimal DepositView() {
+    // Revisar si se puede mejorar
         final Scanner scanner = new Scanner(System.in);
-        System.out.print("Please state the amount you are going to deposit: ");
-        BigDecimal money = scanner.nextBigDecimal();
-        return money;
+        while (true) {
+            try {
+                System.out.print("Please state the amount you are going to deposit: ");
+                String comprobar = scanner.nextLine();
+                BigDecimal money = new BigDecimal(comprobar);
+                if (money.compareTo(BigDecimal.ZERO) <= 0) {
+                    System.out.println("The deposit cannot be 0 or less than 0");
+                    continue;
+                }
+                return money;
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid Option, They have to be numbers");
+            }
+        }
     }
 
     public String[] getLoginView() {
