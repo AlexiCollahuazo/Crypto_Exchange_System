@@ -1,11 +1,7 @@
 package com.globant.controller;
 
-import com.globant.model.user.User;
-import com.globant.service.UserAuthentication;
+import com.globant.service.UserAuthenticationService;
 import com.globant.view.ConsoleView;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class MenuUserController {
 
@@ -15,7 +11,7 @@ public class MenuUserController {
    private boolean active;
 
 
-    public MenuUserController(ConsoleView view, UserAuthentication userauthn) {
+    public MenuUserController(ConsoleView view, UserAuthenticationService userauthn) {
         this.view = view;
        this.registerController = new RegisterController(view, userauthn);
        this.loginController = new LoginController(view, userauthn);

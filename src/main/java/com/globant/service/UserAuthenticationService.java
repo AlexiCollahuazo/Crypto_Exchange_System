@@ -6,10 +6,10 @@ import com.globant.model.user.UserAuthenticationInterface;
 import java.util.HashMap;
 import java.util.Map;
 
-public class UserAuthentication implements UserAuthenticationInterface {
+public class UserAuthenticationService implements UserAuthenticationInterface {
     private Map<String, User> users;
 
-    public UserAuthentication() {
+    public UserAuthenticationService() {
         users = new HashMap<>();
     }
 

@@ -4,22 +4,24 @@ import com.globant.model.user.User;
 import com.globant.model.user.UserWallet;
 import com.globant.service.UnknownUserException;
 import com.globant.service.UserSingleton;
+import com.globant.service.UserWalletService;
 import com.globant.view.ConsoleView;
 
 import java.math.BigDecimal;
 
 public class DepositController implements ControllerExecuteInterface {
     private final ConsoleView view;
+    private final UserWalletService wallet;
 
     public DepositController( ConsoleView view) {
         this.view = view;
+        this.wallet = new UserWalletService(UserSingleton.getInstance());
     }
 
     public void execute() {
         BigDecimal Amount = view.DepositView();
         try
         {
-            UserWallet wallet = UserSingleton.getInstance().getCurrentWallet();
             wallet.deposit(Amount);
             view.showSuccessMessage("Your new wallet balance is: " + wallet.getBalance());
 
