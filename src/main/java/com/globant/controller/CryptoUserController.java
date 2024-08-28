@@ -10,12 +10,13 @@ public class CryptoUserController {
     private  final ConsoleView view;
     private  final DepositController depositController;
     private  final ShowBalanceController showBalanceController;
-
+    private final ExchangeController exchangeController;
 
     public CryptoUserController(ConsoleView view) {
         this.view = view;
         this.depositController = new DepositController(view);
         this.showBalanceController = new ShowBalanceController(view);
+        this.exchangeController = new ExchangeController(view);
     }
 
     public void run() {
@@ -29,17 +30,22 @@ public class CryptoUserController {
                     showBalanceController.execute();
                     break;
                 case 3:
+                    // EXCHANGE
+                    exchangeController.execute();
 
                     break;
 
                 case 4:
+                    // BUY ORDER
 
                     break;
 
                 case 5:
+                    // SELL ORDER
 
                     break;
                 case 6:
+                    // VIEW TRANSACTIONS
 
                     break;
                 case 7:

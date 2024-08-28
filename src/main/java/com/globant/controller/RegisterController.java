@@ -1,17 +1,17 @@
 package com.globant.controller;
 
 import com.globant.model.user.User;
-import com.globant.service.UserAuthentication;
+import com.globant.service.UserAuthenticationService;
 import com.globant.service.UnknownUserException;
 import com.globant.view.ConsoleView;
 
  class RegisterController implements ControllerExecuteInterface {
     private final ConsoleView view;
-    private final UserAuthentication userauthn;
+    private final UserAuthenticationService userauthn;
 
-     public RegisterController(ConsoleView view, UserAuthentication userAuthentication) {
+     public RegisterController(ConsoleView view, UserAuthenticationService userAuthenticationService) {
          this.view = view;
-         this.userauthn = userAuthentication;
+         this.userauthn = userAuthenticationService;
      }
 
      public void execute() {

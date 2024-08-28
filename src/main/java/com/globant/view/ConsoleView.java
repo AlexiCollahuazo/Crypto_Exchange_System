@@ -1,11 +1,9 @@
 package com.globant.view;
 
-import com.globant.model.user.Cryptocurrencies;
-import com.globant.service.UnknownUserException;
+import com.globant.service.CryptoService;
 
 import java.math.BigDecimal;
 import java.util.InputMismatchException;
-import java.util.Map;
 import java.util.Scanner;
 
 public class ConsoleView {
@@ -15,6 +13,7 @@ public class ConsoleView {
     private static final String ANSI_GREEN = "\u001B[32m";
     private static final String ANSI_BLUE = "\u001B[34m";
     private static final int INVALID_CHOICE = -1;
+    private static final BigDecimal INVALID_CHOICE1 = BigDecimal.valueOf(-1);
 
     public int MenuUserChoice() {
         System.out.println("****************Welcome to Exchange Crypto********** :)");
@@ -53,18 +52,18 @@ public class ConsoleView {
     }
 
     public String[] getRegisterView() {
-       final Scanner scanner = new Scanner(System.in);
+        final Scanner scanner = new Scanner(System.in);
         System.out.print("Please register your name: ");
         String name = scanner.nextLine();
         System.out.print("Please register your email: ");
         String email = scanner.nextLine();
         System.out.print("Please register your password: ");
         String password = scanner.nextLine();
-        return new String[] {name, email, password};
+        return new String[]{name, email, password};
     }
 
     public BigDecimal DepositView() {
-    // Revisar si se puede mejorar
+        // Revisar si se puede mejorar, crear clase de servicio
         final Scanner scanner = new Scanner(System.in);
         while (true) {
             try {
@@ -88,18 +87,30 @@ public class ConsoleView {
         String email = scanner.nextLine();
         System.out.print("Please enter your password: ");
         String password = scanner.nextLine();
-        return new String[] {email, password};
+        return new String[]{email, password};
     }
 
     public void showUserId(int userId) {
         System.out.println("USER ID IS: " + userId);
     }
 
-    public void GetCryptosView(Map<String, Cryptocurrencies> cryptocurrencieslist) {
-        System.out.println("Precios actuales del mercado:");
-        for (Cryptocurrencies crypto : cryptocurrencieslist.values()) {
-            System.out.println(crypto.getType() + ": $" + crypto.getPrice() + " USD, AVAILABLE: " + crypto.getAmount());
-        }
+
+    public String ExchangeTypeView()
+    {
+        final Scanner scanner = new Scanner(System.in);
+        System.out.println("Please enter a cryptocurrency from the following list:");
+        CryptoService cryptoService = new CryptoService();
+        cryptoService.Infocryptos();
+        return scanner.nextLine();
+    }
+
+    public BigDecimal ExchangeAmountView()
+    {
+            final Scanner scanner = new Scanner(System.in);
+            System.out.println("Enter the amount of cryptocurrencies you want");
+            return scanner.nextBigDecimal();
+
+
     }
 
     public void showLogoutMessage(String Message) {

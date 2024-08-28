@@ -1,17 +1,17 @@
 package com.globant.controller;
 
 import com.globant.model.user.User;
-import com.globant.service.UserAuthentication;
+import com.globant.service.UserAuthenticationService;
 import com.globant.service.UnknownUserException;
 import com.globant.service.UserSingleton;
 import com.globant.view.ConsoleView;
 
 public class LoginController implements ControllerExecuteInterface {
     private final ConsoleView view;
-    private final UserAuthentication userauthn;
+    private final UserAuthenticationService userauthn;
     private final CryptoUserController cryptocontroller;
 
-    public LoginController(ConsoleView view, UserAuthentication userauthn) {
+    public LoginController(ConsoleView view, UserAuthenticationService userauthn) {
         this.view = view;
         this.userauthn = userauthn;
         this.cryptocontroller = new CryptoUserController(view);
