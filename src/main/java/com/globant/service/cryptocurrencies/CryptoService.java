@@ -1,6 +1,6 @@
-package com.globant.service;
+package com.globant.service.cryptocurrencies;
 
-import com.globant.model.user.Cryptocurrencies;
+import com.globant.model.cryptocurrencies.Cryptocurrencies;
 
 import java.math.BigDecimal;
 import java.util.HashMap;

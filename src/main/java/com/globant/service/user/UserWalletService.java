@@ -1,7 +1,4 @@
-package com.globant.service;
-
-import com.globant.model.user.User;
-import com.globant.model.user.UserWallet;
+package com.globant.service.user;
 
 import java.math.BigDecimal;
 import java.util.Map;

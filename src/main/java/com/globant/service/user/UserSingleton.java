@@ -1,4 +1,4 @@
-package com.globant.service;
+package com.globant.service.user;
 
 import com.globant.model.user.User;
 import com.globant.model.user.UserWallet;

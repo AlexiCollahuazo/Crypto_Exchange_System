@@ -1,7 +1,10 @@
-package com.globant.controller;
+package com.globant.controller.MenuCrypto;
 
-import com.globant.model.user.Cryptocurrencies;
-import com.globant.service.*;
+import com.globant.controller.ControllerExecuteInterface;
+import com.globant.model.cryptocurrencies.Cryptocurrencies;
+import com.globant.service.cryptocurrencies.CryptoService;
+import com.globant.service.user.UserSingleton;
+import com.globant.service.user.UserWalletService;
 import com.globant.view.ConsoleView;
 
 import java.math.BigDecimal;
@@ -9,7 +12,7 @@ import java.math.BigDecimal;
 public class ExchangeController implements ControllerExecuteInterface {
     private ConsoleView view;
     private final CryptoService cryptoService;
-    private  UserWalletService wallet;
+    private UserWalletService wallet;
 
 
     public ExchangeController(ConsoleView view) {

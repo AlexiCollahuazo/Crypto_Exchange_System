@@ -1,6 +1,6 @@
 package com.globant.view;
 
-import com.globant.service.CryptoService;
+import com.globant.service.cryptocurrencies.CryptoService;
 
 import java.math.BigDecimal;
 import java.util.InputMismatchException;
@@ -13,7 +13,7 @@ public class ConsoleView {
     private static final String ANSI_GREEN = "\u001B[32m";
     private static final String ANSI_BLUE = "\u001B[34m";
     private static final int INVALID_CHOICE = -1;
-    private static final BigDecimal INVALID_CHOICE1 = BigDecimal.valueOf(-1);
+
 
     public int MenuUserChoice() {
         System.out.println("****************Welcome to Exchange Crypto********** :)");
@@ -30,7 +30,7 @@ public class ConsoleView {
         }
     }
 
-    public int CryptoUserChoice() {
+    public int MenuCryptoChoice() {
         final Scanner scanner = new Scanner(System.in);
         System.out.println("****************Welcome to Exchange Crypto********** :)");
         System.out.println("Choose one of the following options:");
@@ -112,6 +112,7 @@ public class ConsoleView {
 
 
     }
+
 
     public void showLogoutMessage(String Message) {
         System.out.println(ANSI_RED + Message + ANSI_RESET);

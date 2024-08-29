@@ -1,18 +1,15 @@
-package com.globant.controller;
+package com.globant.controller.MenuCrypto;
 
-import com.globant.model.user.User;
 import com.globant.view.ConsoleView;
 
-import java.math.BigDecimal;
-
-public class CryptoUserController {
+public class MenuCryptoController {
 
     private  final ConsoleView view;
     private  final DepositController depositController;
     private  final ShowBalanceController showBalanceController;
     private final ExchangeController exchangeController;
 
-    public CryptoUserController(ConsoleView view) {
+    public MenuCryptoController(ConsoleView view) {
         this.view = view;
         this.depositController = new DepositController(view);
         this.showBalanceController = new ShowBalanceController(view);
@@ -21,7 +18,7 @@ public class CryptoUserController {
 
     public void run() {
         while (true) {
-            int choice = view.CryptoUserChoice();
+            int choice = view.MenuCryptoChoice();
             switch (choice) {
                 case 1:
                     depositController.execute();

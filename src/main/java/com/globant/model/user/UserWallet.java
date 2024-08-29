@@ -1,10 +1,5 @@
 package com.globant.model.user;
 
-import com.globant.service.TransactionErrorException;
-import com.globant.service.UnknownUserException;
-import com.globant.service.UserSingleton;
-import com.globant.view.ConsoleView;
-
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;

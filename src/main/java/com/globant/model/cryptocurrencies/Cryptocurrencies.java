@@ -1,4 +1,4 @@
-package com.globant.model.user;
+package com.globant.model.cryptocurrencies;
 
 import java.math.BigDecimal;
 

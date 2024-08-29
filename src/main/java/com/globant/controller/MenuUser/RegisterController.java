@@ -1,11 +1,12 @@
-package com.globant.controller;
+package com.globant.controller.MenuUser;
 
+import com.globant.controller.ControllerExecuteInterface;
 import com.globant.model.user.User;
-import com.globant.service.UserAuthenticationService;
-import com.globant.service.UnknownUserException;
+import com.globant.service.user.UserAuthenticationService;
+import com.globant.service.user.UnknownUserException;
 import com.globant.view.ConsoleView;
 
- class RegisterController implements ControllerExecuteInterface {
+ public class RegisterController implements ControllerExecuteInterface {
     private final ConsoleView view;
     private final UserAuthenticationService userauthn;
 

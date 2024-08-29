@@ -1,7 +1,7 @@
 package com.globant;
 
-import com.globant.controller.MenuUserController;
-import com.globant.service.UserAuthenticationService;
+import com.globant.controller.MenuUser.MenuUserController;
+import com.globant.service.user.UserAuthenticationService;
 import com.globant.view.ConsoleView;
 
 public class CryptoApplication {

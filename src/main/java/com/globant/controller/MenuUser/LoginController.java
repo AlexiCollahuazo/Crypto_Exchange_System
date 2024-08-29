@@ -1,20 +1,22 @@
-package com.globant.controller;
+package com.globant.controller.MenuUser;
 
+import com.globant.controller.ControllerExecuteInterface;
+import com.globant.controller.MenuCrypto.MenuCryptoController;
 import com.globant.model.user.User;
-import com.globant.service.UserAuthenticationService;
-import com.globant.service.UnknownUserException;
-import com.globant.service.UserSingleton;
+import com.globant.service.user.UserAuthenticationService;
+import com.globant.service.user.UnknownUserException;
+import com.globant.service.user.UserSingleton;
 import com.globant.view.ConsoleView;
 
 public class LoginController implements ControllerExecuteInterface {
     private final ConsoleView view;
     private final UserAuthenticationService userauthn;
-    private final CryptoUserController cryptocontroller;
+    private final MenuCryptoController cryptocontroller;
 
     public LoginController(ConsoleView view, UserAuthenticationService userauthn) {
         this.view = view;
         this.userauthn = userauthn;
-        this.cryptocontroller = new CryptoUserController(view);
+        this.cryptocontroller = new MenuCryptoController(view);
     }
 
     public void execute() {
