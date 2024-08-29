@@ -4,12 +4,13 @@ import com.globant.controller.ControllerExecuteInterface;
 import com.globant.model.user.UserWallet;
 import com.globant.service.user.UnknownUserException;
 import com.globant.service.user.UserSingleton;
-import com.globant.view.ConsoleView;
+import com.globant.view.MenuCryptoView;
 
 public class ShowBalanceController implements ControllerExecuteInterface {
-    private ConsoleView view;
+    //private ConsoleView view;
+    private MenuCryptoView view;
 
-    public ShowBalanceController(ConsoleView view) {
+    public ShowBalanceController(/*ConsoleView*/ MenuCryptoView view) {
         this.view = view;
     }
 

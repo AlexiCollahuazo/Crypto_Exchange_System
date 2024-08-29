@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class OrdersBook {
-    // revisar si es mejor builder
+
     private static OrdersBook instance;
     private Map<String, Map<String, BigDecimal>> buyorders;
     private Map<String, Map<String, BigDecimal>> sellorders;
@@ -16,7 +16,6 @@ public class OrdersBook {
         sellorders = new HashMap<>();
     }
 
-// Probar si funciona como instancia global.
 
     public static OrdersBook getInstance() {
         if (instance == null) {

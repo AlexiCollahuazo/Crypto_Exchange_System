@@ -1,19 +1,22 @@
 package com.globant.controller.MenuCrypto;
 
-import com.globant.view.ConsoleView;
+import com.globant.view.MenuCryptoView;
 
 public class MenuCryptoController {
 
-    private  final ConsoleView view;
     private  final DepositController depositController;
     private  final ShowBalanceController showBalanceController;
     private final ExchangeController exchangeController;
+    private final MenuCryptoView view;
+    private final BuyOrderController buyOrderController;
 
-    public MenuCryptoController(ConsoleView view) {
+
+    public MenuCryptoController(/*ConsoleView*/ MenuCryptoView view) {
         this.view = view;
         this.depositController = new DepositController(view);
         this.showBalanceController = new ShowBalanceController(view);
         this.exchangeController = new ExchangeController(view);
+        this.buyOrderController = new BuyOrderController(view);
     }
 
     public void run() {
@@ -34,6 +37,7 @@ public class MenuCryptoController {
 
                 case 4:
                     // BUY ORDER
+                    buyOrderController.execute();
 
                     break;
 

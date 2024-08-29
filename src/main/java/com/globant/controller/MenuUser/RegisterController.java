@@ -4,13 +4,14 @@ import com.globant.controller.ControllerExecuteInterface;
 import com.globant.model.user.User;
 import com.globant.service.user.UserAuthenticationService;
 import com.globant.service.user.UnknownUserException;
-import com.globant.view.ConsoleView;
+import com.globant.view.MenuUserView;
 
  public class RegisterController implements ControllerExecuteInterface {
-    private final ConsoleView view;
+    private final MenuUserView view;
     private final UserAuthenticationService userauthn;
 
-     public RegisterController(ConsoleView view, UserAuthenticationService userAuthenticationService) {
+
+     public RegisterController(MenuUserView view, UserAuthenticationService userAuthenticationService) {
          this.view = view;
          this.userauthn = userAuthenticationService;
      }
@@ -19,13 +20,14 @@ import com.globant.view.ConsoleView;
           String[] details = view.getRegisterView();
          try
          {
-             if (userauthn.VerifyEmail(details[1])) {
+             if (userauthn.VerifyEmail(details[1]) /*email*/) {
              view.showError("Email Registered, Try another One");
              } else {
-
              User user = new User(details[0], details[1], details[2]);
              userauthn.registerUser(user);
-             view.showUserId(user.getID());
+             int userId = user.getID();
+
+             view.showUserId("USER ID IS: ", userId );
              view.showSuccessMessage("User Registered Successfully");
          }
       } catch (UnknownUserException e) {

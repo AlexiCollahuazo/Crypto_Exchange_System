@@ -6,7 +6,8 @@ import java.math.BigDecimal;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class ConsoleView {
+public class MenuCryptoView {
+
     private final Scanner scanner = new Scanner(System.in);
     private static final String ANSI_RED = "\u001B[31m";
     private static final String ANSI_RESET = "\u001B[0m";
@@ -14,21 +15,6 @@ public class ConsoleView {
     private static final String ANSI_BLUE = "\u001B[34m";
     private static final int INVALID_CHOICE = -1;
 
-
-    public int MenuUserChoice() {
-        System.out.println("****************Welcome to Exchange Crypto********** :)");
-        System.out.println("Choose one of the following options:");
-        System.out.println("1. Register");
-        System.out.println("2. Login");
-        System.out.println("3. Quit");
-        System.out.print("Enter your choice: ");
-        try {
-            return scanner.nextInt();
-        } catch (InputMismatchException e) {
-            scanner.nextLine();
-            return INVALID_CHOICE;
-        }
-    }
 
     public int MenuCryptoChoice() {
         final Scanner scanner = new Scanner(System.in);
@@ -44,26 +30,19 @@ public class ConsoleView {
         System.out.println("8. Quit");
         System.out.print("Enter your choice: ");
         try {
-            return scanner.nextInt();
+            int choice = scanner.nextInt();
+            scanner.nextLine();
+            return choice;
+
         } catch (InputMismatchException e) {
             scanner.nextLine();
             return INVALID_CHOICE;
         }
     }
 
-    public String[] getRegisterView() {
-        final Scanner scanner = new Scanner(System.in);
-        System.out.print("Please register your name: ");
-        String name = scanner.nextLine();
-        System.out.print("Please register your email: ");
-        String email = scanner.nextLine();
-        System.out.print("Please register your password: ");
-        String password = scanner.nextLine();
-        return new String[]{name, email, password};
-    }
 
     public BigDecimal DepositView() {
-        // Revisar si se puede mejorar, crear clase de servicio
+        // revisar si se puede mejorar
         final Scanner scanner = new Scanner(System.in);
         while (true) {
             try {
@@ -81,35 +60,43 @@ public class ConsoleView {
         }
     }
 
-    public String[] getLoginView() {
-        final Scanner scanner = new Scanner(System.in);
-        System.out.print("Please enter your email: ");
-        String email = scanner.nextLine();
-        System.out.print("Please enter your password: ");
-        String password = scanner.nextLine();
-        return new String[]{email, password};
-    }
-
-    public void showUserId(int userId) {
-        System.out.println("USER ID IS: " + userId);
-    }
 
 
-    public String ExchangeTypeView()
+    public String CryptoTypeView(String message)
     {
-        final Scanner scanner = new Scanner(System.in);
-        System.out.println("Please enter a cryptocurrency from the following list:");
         CryptoService cryptoService = new CryptoService();
+        System.out.println(message);
         cryptoService.Infocryptos();
         return scanner.nextLine();
     }
 
-    public BigDecimal ExchangeAmountView()
+    public BigDecimal ExchangeAmountView(String message)
     {
-            final Scanner scanner = new Scanner(System.in);
-            System.out.println("Enter the amount of cryptocurrencies you want");
-            return scanner.nextBigDecimal();
+        System.out.println(message);
+       BigDecimal amount = scanner.nextBigDecimal();
+       scanner.nextLine();
+        return amount;
+    }
 
+
+    public String getdataString(String message){
+        System.out.println(message);
+        return scanner.nextLine();
+    }
+
+    public BigDecimal getdataBigdecimal(String message){
+       try {
+           System.out.println(message);
+           BigDecimal amount = scanner.nextBigDecimal();
+           scanner.nextLine();
+           return amount;
+       }
+       catch (NumberFormatException e)
+       {
+           showError("Wrong number");
+           return  getdataBigdecimal(message);
+
+       }
 
     }
 

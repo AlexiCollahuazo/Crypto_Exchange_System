@@ -5,17 +5,16 @@ import com.globant.model.cryptocurrencies.Cryptocurrencies;
 import com.globant.service.cryptocurrencies.CryptoService;
 import com.globant.service.user.UserSingleton;
 import com.globant.service.user.UserWalletService;
-import com.globant.view.ConsoleView;
+import com.globant.view.MenuCryptoView;
 
 import java.math.BigDecimal;
 
 public class ExchangeController implements ControllerExecuteInterface {
-    private ConsoleView view;
     private final CryptoService cryptoService;
-    private UserWalletService wallet;
+    private final UserWalletService wallet;
+    private final MenuCryptoView view;
 
-
-    public ExchangeController(ConsoleView view) {
+    public ExchangeController( MenuCryptoView view) {
         this.view = view;
         this.cryptoService = CryptoService.getInstance();
         this.wallet = new UserWalletService(UserSingleton.getInstance());
@@ -25,9 +24,9 @@ public class ExchangeController implements ControllerExecuteInterface {
     public void execute() {
         try
         {
-            String Type = view.ExchangeTypeView();
+            String Type = view.CryptoTypeView("Please enter a cryptocurrency from the following list:");
             String TypeExchange = Type.toUpperCase();
-            BigDecimal ExchangeAmount = view.ExchangeAmountView();
+            BigDecimal ExchangeAmount = view.ExchangeAmountView("Enter the amount of cryptocurrencies you want");
             if(ExchangeAmount.compareTo(BigDecimal.ZERO) <= 0)
             {
                 view.showError("Cannot be 0 or less than 0");
@@ -53,6 +52,7 @@ public class ExchangeController implements ControllerExecuteInterface {
                 view.showError("There are not enough cryptocurrencies for sale, " + crypto.getAmount()+ " Left ");
                 return;
             };
+
 
             wallet.withdraw(totalamount);
             wallet.addCrypto(TypeExchange,ExchangeAmount);

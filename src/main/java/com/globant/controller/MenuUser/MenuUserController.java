@@ -1,16 +1,16 @@
 package com.globant.controller.MenuUser;
 
 import com.globant.service.user.UserAuthenticationService;
-import com.globant.view.ConsoleView;
+import com.globant.view.MenuUserView;
 
 public class MenuUserController {
 
-    private final ConsoleView view;
+    private final MenuUserView view;
    private final RegisterController registerController;
    private final LoginController loginController;
    private boolean active;
 
-    public MenuUserController(ConsoleView view, UserAuthenticationService userauthn) {
+    public MenuUserController(MenuUserView view, UserAuthenticationService userauthn) {
         this.view = view;
        this.registerController = new RegisterController(view, userauthn);
        this.loginController = new LoginController(view, userauthn);

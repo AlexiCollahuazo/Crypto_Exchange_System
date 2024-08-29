@@ -4,15 +4,14 @@ import com.globant.controller.ControllerExecuteInterface;
 import com.globant.service.user.UnknownUserException;
 import com.globant.service.user.UserSingleton;
 import com.globant.service.user.UserWalletService;
-import com.globant.view.ConsoleView;
+import com.globant.view.MenuCryptoView;
 
 import java.math.BigDecimal;
 
 public class DepositController implements ControllerExecuteInterface {
-    private final ConsoleView view;
     private final UserWalletService wallet;
-
-    public DepositController( ConsoleView view) {
+    private final MenuCryptoView view;
+    public DepositController( MenuCryptoView view) {
         this.view = view;
         this.wallet = new UserWalletService(UserSingleton.getInstance());
     }
