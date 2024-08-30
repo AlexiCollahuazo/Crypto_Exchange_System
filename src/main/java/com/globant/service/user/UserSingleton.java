@@ -27,6 +27,7 @@ public class UserSingleton {
         return currentWallet;
     }
 
+
     public void setCurrentUser(User Userprime) {
         this.currentUser = Userprime;
         if (Userprime != null) {

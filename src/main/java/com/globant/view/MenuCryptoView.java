@@ -42,40 +42,46 @@ public class MenuCryptoView {
 
 
     public BigDecimal DepositView() {
-        // revisar si se puede mejorar
-        final Scanner scanner = new Scanner(System.in);
-        while (true) {
-            try {
-                System.out.print("Please state the amount you are going to deposit: ");
-                String comprobar = scanner.nextLine();
-                BigDecimal money = new BigDecimal(comprobar);
-                if (money.compareTo(BigDecimal.ZERO) <= 0) {
-                    System.out.println("The deposit cannot be 0 or less than 0");
-                    continue;
-                }
-                return money;
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid Option, They have to be numbers");
-            }
+        try {
+            System.out.print("Please state the amount you are going to deposit: ");
+            // String check = scanner.nextLine();
+            BigDecimal money = scanner.nextBigDecimal();
+            return money;
+        } catch (InputMismatchException e) {
+            scanner.nextLine();
+           showError("Invalid Option, They have to be numbers");
+            return DepositView();
+
         }
     }
 
 
-
     public String CryptoTypeView(String message)
     {
-        CryptoService cryptoService = new CryptoService();
-        System.out.println(message);
-        cryptoService.Infocryptos();
-        return scanner.nextLine();
+        try {
+            CryptoService cryptoService = new CryptoService();
+            System.out.println(message);
+            cryptoService.Infocryptos();
+            return scanner.nextLine();
+        }
+        catch (IllegalArgumentException e){
+        showError("Error");
+        return CryptoTypeView(message);
+    }
     }
 
     public BigDecimal ExchangeAmountView(String message)
     {
-        System.out.println(message);
-       BigDecimal amount = scanner.nextBigDecimal();
-       scanner.nextLine();
-        return amount;
+        try {
+            System.out.println(message);
+            BigDecimal amount = scanner.nextBigDecimal();
+            scanner.nextLine();
+            return amount;
+        } catch (InputMismatchException e) {
+            scanner.nextLine();
+            showError("Error, try again");
+            return  ExchangeAmountView(message);
+        }
     }
 
 
@@ -91,15 +97,15 @@ public class MenuCryptoView {
            scanner.nextLine();
            return amount;
        }
-       catch (NumberFormatException e)
+       catch (InputMismatchException e)
        {
+           scanner.nextLine();
            showError("Wrong number");
            return  getdataBigdecimal(message);
 
        }
 
     }
-
 
     public void showLogoutMessage(String Message) {
         System.out.println(ANSI_RED + Message + ANSI_RESET);

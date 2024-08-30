@@ -65,7 +65,7 @@ public class CryptoService {
 
     public void Infocryptos(){
         cryptocurrencieslist.forEach((type, crypto) -> {
-            System.out.println(type + ", Price: " + crypto.getPrice() );
+            System.out.println(type + ", Market Price: " + crypto.getPrice() );
         });
     }
 

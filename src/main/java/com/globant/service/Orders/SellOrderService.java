@@ -7,26 +7,29 @@ import com.globant.service.user.UserWalletService;
 import java.math.BigDecimal;
 import java.util.Map;
 
-public class BuyOrderService {
+public class SellOrderService {
+
 
     private OrdersBook ordersBook;
 
-    public BuyOrderService() {
+    public SellOrderService() {
         this.ordersBook = OrdersBook.getInstance();
     }
 
-    public void placeBuyOrder(int userId,String Type, BigDecimal amount, BigDecimal maxPrice, UserWalletService wallet) {
+    public void placeSellOrder(int userId, String Type, BigDecimal amount, BigDecimal maxPrice, UserWalletService wallet) {
         BigDecimal totalCost = amount.multiply(maxPrice);
         if (wallet.getBalance().compareTo(totalCost) >= 0) {
-            wallet.withdraw(totalCost);// restando la cantidad, verificar esto.
+            wallet.substractCrypto(Type,amount);// restando bitcoin, verificar esto.
             ordersBook.placeBuyOrder(userId,Type,amount, maxPrice);
         } else {
-            throw new IllegalArgumentException("You don't have enough money to place the buy order");
+            throw new IllegalArgumentException("You don't have enough money to place the sell order.");
         }
     }
 
-    public Map<String, Order> getBuyOrders() {
-        return ordersBook.getBuyOrders();
+
+    public Map<String, Order> getSellOrders() {
+        return ordersBook.getSellOrders();
     }
+
 
 }

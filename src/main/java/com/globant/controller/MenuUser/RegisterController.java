@@ -28,7 +28,6 @@ import com.globant.view.MenuUserView;
                  user = new User(details[0], details[1], details[2]);
              userauthn.registerUser(user);
              int userId = user.getID();
-
              view.showUserId("USER ID IS: ", userId );
              view.showSuccessMessage("User Registered Successfully");
          }

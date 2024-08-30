@@ -24,11 +24,21 @@ public class OrdersBook {
         return instance;
     }
 
-    public void placeBuyOrder(String cryptoType, BigDecimal price) {
+    public void placeBuyOrder(int userId,String cryptoType,BigDecimal amount, BigDecimal price) {
         int orderId = generateOrderId();// revisar esto
-        Order order = new Order(orderId, cryptoType, price);
+        Order order = new Order(userId,orderId, cryptoType,amount, price);
         buyorders.put("BUY ORDER", order);
 
+    }
+
+    public void placeSellOrder(int userId,String cryptoType,BigDecimal amount, BigDecimal price) {
+        int orderId = generateOrderId();// revisar esto
+        Order order = new Order(userId,orderId, cryptoType,amount, price);
+        buyorders.put("SELL ORDER", order);
+    }
+
+    public Map<String, Order> getSellOrders() {
+        return sellorders;
     }
 
     public Map<String, Order> getBuyOrders() {
