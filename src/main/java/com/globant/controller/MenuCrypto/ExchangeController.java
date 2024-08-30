@@ -24,16 +24,20 @@ public class ExchangeController implements ControllerExecuteInterface {
     public void execute() {
         try
         {
+
             String Type = view.CryptoTypeView("Please enter a cryptocurrency from the following list:");
             String TypeExchange = Type.toUpperCase();
             BigDecimal ExchangeAmount = view.ExchangeAmountView("Enter the amount of cryptocurrencies you want");
+            Cryptocurrencies crypto = cryptoService.getCryptocurrencies(TypeExchange);
+
+            // De aqui. Ver como mejorar esto
             if(ExchangeAmount.compareTo(BigDecimal.ZERO) <= 0)
             {
                 view.showError("Cannot be 0 or less than 0");
                 return;
             }
 
-            Cryptocurrencies crypto = cryptoService.getCryptocurrencies(TypeExchange);
+
             if (crypto == null) {
                 view.showError("The cryptocurrency you are looking for is not listed");
                 return;
@@ -53,6 +57,7 @@ public class ExchangeController implements ControllerExecuteInterface {
                 return;
             };
 
+            // hasta aqui
 
             wallet.withdraw(totalamount);
             wallet.addCrypto(TypeExchange,ExchangeAmount);

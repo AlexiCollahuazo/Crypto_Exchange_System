@@ -20,6 +20,10 @@ public class UserWalletService {
         return userSingleton.getCurrentWallet().getMycryptocurrencies();
     }
 
+    public BigDecimal getMycryptocurrencies(String name) {
+        return userSingleton.getCurrentWallet().getMycryptocurrencies(name);
+    }
+
 
     public void withdraw(BigDecimal totalAmount) {
         try{
@@ -47,6 +51,9 @@ public class UserWalletService {
 
         }
     }
+
+
+
 
     public boolean checkbalance(UserWalletService wallet, BigDecimal totalAmount) {
         return wallet.getBalance().compareTo(totalAmount) >= 0;

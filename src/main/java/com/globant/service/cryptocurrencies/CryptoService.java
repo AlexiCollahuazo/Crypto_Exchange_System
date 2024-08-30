@@ -46,6 +46,7 @@ public class CryptoService {
         return cryptocurrencieslist.get(price);
     }
 
+
     public boolean withdrawCryptos(String type, BigDecimal Amount) {
 
         Cryptocurrencies crypto = cryptocurrencieslist.get(type.toUpperCase());
@@ -55,6 +56,7 @@ public class CryptoService {
         }
         return false;
     }
+
 
     public Map<String, Cryptocurrencies> getCryptocurrencieslist() {
         return cryptocurrencieslist;

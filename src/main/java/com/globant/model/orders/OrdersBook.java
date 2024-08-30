@@ -7,8 +7,8 @@ import java.util.Map;
 public class OrdersBook {
 
     private static OrdersBook instance;
-    private Map<String, Map<String, BigDecimal>> buyorders;
-    private Map<String, Map<String, BigDecimal>> sellorders;
+    private Map<String, Order> buyorders;
+    private Map<String, Order> sellorders;
 
     private OrdersBook()
     {
@@ -23,6 +23,23 @@ public class OrdersBook {
         }
         return instance;
     }
+
+    public void placeBuyOrder(String cryptoType, BigDecimal price) {
+        int orderId = generateOrderId();// revisar esto
+        Order order = new Order(orderId, cryptoType, price);
+        buyorders.put("BUY ORDER", order);
+
+    }
+
+    public Map<String, Order> getBuyOrders() {
+        return buyorders;
+    }
+
+
+    private int generateOrderId() {
+        return buyorders.size() + sellorders.size() + 1;
+    }
+
 
 
 }

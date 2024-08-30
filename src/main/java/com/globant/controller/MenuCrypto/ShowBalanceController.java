@@ -7,10 +7,10 @@ import com.globant.service.user.UserSingleton;
 import com.globant.view.MenuCryptoView;
 
 public class ShowBalanceController implements ControllerExecuteInterface {
-    //private ConsoleView view;
+
     private MenuCryptoView view;
 
-    public ShowBalanceController(/*ConsoleView*/ MenuCryptoView view) {
+    public ShowBalanceController(MenuCryptoView view) {
         this.view = view;
     }
 

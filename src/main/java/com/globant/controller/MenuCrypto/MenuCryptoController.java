@@ -38,7 +38,6 @@ public class MenuCryptoController {
                 case 4:
                     // BUY ORDER
                     buyOrderController.execute();
-
                     break;
 
                 case 5:
