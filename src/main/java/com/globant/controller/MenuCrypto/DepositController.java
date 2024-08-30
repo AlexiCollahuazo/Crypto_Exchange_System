@@ -7,6 +7,7 @@ import com.globant.service.user.UserWalletService;
 import com.globant.view.MenuCryptoView;
 
 import java.math.BigDecimal;
+import java.util.InputMismatchException;
 
 public class DepositController implements ControllerExecuteInterface {
     private final UserWalletService wallet;
@@ -18,15 +19,23 @@ public class DepositController implements ControllerExecuteInterface {
 
     public void execute() {
         BigDecimal Amount = view.DepositView();
-        try
-        {
-            wallet.deposit(Amount);
-            view.showSuccessMessage("Your new wallet balance is: " + wallet.getBalance());
 
-        } catch (UnknownUserException e) {
-            view.showError("Deposit error");
-
+        if (Amount.compareTo(BigDecimal.ZERO) <= 0) {
+            view.showError("The deposit cannot be 0 or less than 0");
+            return;
         }
 
+            try {
+                wallet.deposit(Amount);
+                view.showSuccessMessage("Your new wallet balance is: " + wallet.getBalance());
+
+            } catch (UnknownUserException e) {
+                view.showError("Deposit error");
+
+            }
+
+
+        }
     }
-}
+
+

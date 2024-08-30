@@ -1,5 +1,8 @@
 package com.globant.service.user;
 
+import com.globant.model.user.UserWallet;
+
+import java.lang.reflect.Type;
 import java.math.BigDecimal;
 import java.util.Map;
 
@@ -52,8 +55,22 @@ public class UserWalletService {
         }
     }
 
+    public boolean Checkcryptocurrencies(UserWalletService wallet, String type, BigDecimal Amount) {
+
+        return wallet.getMycryptocurrencies().get(type).compareTo(Amount)>=0;
+    }
 
 
+
+    public void substractCrypto(String crypto, BigDecimal amount) {
+        try {
+            userSingleton.getCurrentWallet().substractCrypto(crypto, amount);
+        }
+        catch (Exception e){
+            System.out.println("Error subtracting crypto");
+
+        }
+    }
 
     public boolean checkbalance(UserWalletService wallet, BigDecimal totalAmount) {
         return wallet.getBalance().compareTo(totalAmount) >= 0;

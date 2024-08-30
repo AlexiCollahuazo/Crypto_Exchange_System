@@ -33,21 +33,29 @@ public class MenuUserView {
     }
 
     public String[] getRegisterView() {
-        System.out.print("Please register your name: ");
-        String name = scanner.nextLine();
-        System.out.print("Please register your email: ");
-        String email = scanner.nextLine();
-        System.out.print("Please register your password: ");
-        String password = scanner.nextLine();
-        return new String[]{name, email, password};
+        try {
+            System.out.print("Please register your name: ");
+            String name = scanner.nextLine();
+            System.out.print("Please register your email: ");
+            String email = scanner.nextLine();
+            System.out.print("Please register your password: ");
+            String password = scanner.nextLine();
+            return new String[]{name, email, password};
+        }catch (IllegalArgumentException e){
+            return getRegisterView();
+        }
     }
 
     public String[] getLoginView() {
-        System.out.print("Please enter your email: ");
-        String email = scanner.nextLine();
-        System.out.print("Please enter your password: ");
-        String password = scanner.nextLine();
-        return new String[]{email, password};
+        try {
+            System.out.print("Please enter your email: ");
+            String email = scanner.nextLine();
+            System.out.print("Please enter your password: ");
+            String password = scanner.nextLine();
+            return new String[]{email, password};
+        } catch (IllegalArgumentException e){
+            return getLoginView();
+        }
     }
 
     public void showUserId(String message, int userId) {

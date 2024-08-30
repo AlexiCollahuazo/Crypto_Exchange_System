@@ -43,9 +43,9 @@ public class ExchangeController implements ControllerExecuteInterface {
                 return;
             }
 
-            BigDecimal totalamount = crypto.getPrice().multiply(ExchangeAmount);
+            BigDecimal totalAmount = crypto.getPrice().multiply(ExchangeAmount);
 
-            if (!wallet.checkbalance(wallet,totalamount))
+            if (!wallet.checkbalance(wallet,totalAmount))
             {
                 view.showError("You don't have enough money to make the purchase");
                 return;
@@ -59,7 +59,7 @@ public class ExchangeController implements ControllerExecuteInterface {
 
             // hasta aqui
 
-            wallet.withdraw(totalamount);
+            wallet.withdraw(totalAmount);
             wallet.addCrypto(TypeExchange,ExchangeAmount);
             view.showSuccessMessage("Exchange registered of: " + ExchangeAmount +" "+ TypeExchange);
 
