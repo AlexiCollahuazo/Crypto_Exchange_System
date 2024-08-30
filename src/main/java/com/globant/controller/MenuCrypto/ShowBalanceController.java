@@ -1,16 +1,16 @@
-package com.globant.controller;
+package com.globant.controller.MenuCrypto;
 
+import com.globant.controller.ControllerExecuteInterface;
 import com.globant.model.user.UserWallet;
-import com.globant.service.UnknownUserException;
-import com.globant.service.UserSingleton;
-import com.globant.view.ConsoleView;
-
-import java.math.BigDecimal;
+import com.globant.service.user.UnknownUserException;
+import com.globant.service.user.UserSingleton;
+import com.globant.view.MenuCryptoView;
 
 public class ShowBalanceController implements ControllerExecuteInterface {
-    private ConsoleView view;
 
-    public ShowBalanceController(ConsoleView view) {
+    private MenuCryptoView view;
+
+    public ShowBalanceController(MenuCryptoView view) {
         this.view = view;
     }
 

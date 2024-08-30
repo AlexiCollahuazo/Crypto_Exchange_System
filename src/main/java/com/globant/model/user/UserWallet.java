@@ -1,9 +1,6 @@
 package com.globant.model.user;
 
-import com.globant.service.TransactionErrorException;
-import com.globant.service.UnknownUserException;
-import com.globant.service.UserSingleton;
-import com.globant.view.ConsoleView;
+import com.globant.model.cryptocurrencies.Cryptocurrencies;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
@@ -28,6 +25,10 @@ public class UserWallet {
         return mycryptocurrencies;
     }
 
+    public BigDecimal getMycryptocurrencies(String name) {
+        return mycryptocurrencies.getOrDefault(name, BigDecimal.ZERO);
+    }
+
 
     public void withdraw(BigDecimal amount) {
             Balance = Balance.subtract(amount);
@@ -43,6 +44,14 @@ public class UserWallet {
     public void addCrypto(String crypto, BigDecimal amount) {
         mycryptocurrencies.put(crypto, mycryptocurrencies.getOrDefault(crypto, BigDecimal.ZERO).add(amount));
     }
+
+    // Lo utilizaremos para el sell
+    public void substractCrypto(String crypto, BigDecimal amount) {
+        mycryptocurrencies.put(crypto, mycryptocurrencies.getOrDefault(crypto, BigDecimal.ZERO).subtract(amount));
+    }
+
+
+
 
 
 

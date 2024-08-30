@@ -1,7 +1,6 @@
-package com.globant.service;
+package com.globant.service.user;
 
 import com.globant.model.user.User;
-import com.globant.model.user.UserAuthenticationInterface;
 
 import java.util.HashMap;
 import java.util.Map;

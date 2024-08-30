@@ -1,6 +1,6 @@
-package com.globant.service;
+package com.globant.service.cryptocurrencies;
 
-import com.globant.model.user.Cryptocurrencies;
+import com.globant.model.cryptocurrencies.Cryptocurrencies;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
@@ -46,6 +46,7 @@ public class CryptoService {
         return cryptocurrencieslist.get(price);
     }
 
+
     public boolean withdrawCryptos(String type, BigDecimal Amount) {
 
         Cryptocurrencies crypto = cryptocurrencieslist.get(type.toUpperCase());
@@ -55,6 +56,7 @@ public class CryptoService {
         }
         return false;
     }
+
 
     public Map<String, Cryptocurrencies> getCryptocurrencieslist() {
         return cryptocurrencieslist;

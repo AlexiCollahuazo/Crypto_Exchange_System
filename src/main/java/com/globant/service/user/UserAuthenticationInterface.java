@@ -1,4 +1,6 @@
-package com.globant.model.user;
+package com.globant.service.user;
+
+import com.globant.model.user.User;
 
 public interface UserAuthenticationInterface {
 

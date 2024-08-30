@@ -1,7 +1,4 @@
-package com.globant.service;
-
-import com.globant.model.user.User;
-import com.globant.model.user.UserWallet;
+package com.globant.service.user;
 
 import java.math.BigDecimal;
 import java.util.Map;
@@ -21,6 +18,10 @@ public class UserWalletService {
 
     public Map<String, BigDecimal> getMycryptocurrencies() {
         return userSingleton.getCurrentWallet().getMycryptocurrencies();
+    }
+
+    public BigDecimal getMycryptocurrencies(String name) {
+        return userSingleton.getCurrentWallet().getMycryptocurrencies(name);
     }
 
 
@@ -50,6 +51,9 @@ public class UserWalletService {
 
         }
     }
+
+
+
 
     public boolean checkbalance(UserWalletService wallet, BigDecimal totalAmount) {
         return wallet.getBalance().compareTo(totalAmount) >= 0;
