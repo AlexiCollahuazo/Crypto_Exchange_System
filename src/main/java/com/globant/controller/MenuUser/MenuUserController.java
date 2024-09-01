@@ -1,6 +1,5 @@
 package com.globant.controller.MenuUser;
 
-import com.globant.service.user.UserAuthenticationService;
 import com.globant.view.MenuUserView;
 
 public class MenuUserController {

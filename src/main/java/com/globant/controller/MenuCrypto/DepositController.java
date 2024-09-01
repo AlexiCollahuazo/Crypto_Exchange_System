@@ -2,12 +2,11 @@ package com.globant.controller.MenuCrypto;
 
 import com.globant.controller.ControllerExecuteInterface;
 import com.globant.service.user.UnknownUserException;
-import com.globant.service.user.UserSingleton;
+import com.globant.model.user.UserSingleton;
 import com.globant.service.user.UserWalletService;
 import com.globant.view.MenuCryptoView;
 
 import java.math.BigDecimal;
-import java.util.InputMismatchException;
 
 public class DepositController implements ControllerExecuteInterface {
     private final UserWalletService wallet;
@@ -24,7 +23,6 @@ public class DepositController implements ControllerExecuteInterface {
             view.showError("The deposit cannot be 0 or less than 0");
             return;
         }
-
             try {
                 wallet.deposit(Amount);
                 view.showSuccessMessage("Your new wallet balance is: " + wallet.getBalance());

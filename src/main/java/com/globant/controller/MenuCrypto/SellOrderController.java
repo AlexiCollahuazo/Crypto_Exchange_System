@@ -2,10 +2,10 @@ package com.globant.controller.MenuCrypto;
 
 import com.globant.controller.ControllerExecuteInterface;
 import com.globant.model.cryptocurrencies.Cryptocurrencies;
-import com.globant.service.Orders.BuyOrderService;
+import com.globant.service.Orders.MatchOrderService;
 import com.globant.service.Orders.SellOrderService;
 import com.globant.service.cryptocurrencies.CryptoService;
-import com.globant.service.user.UserSingleton;
+import com.globant.model.user.UserSingleton;
 import com.globant.service.user.UserWalletService;
 import com.globant.view.MenuCryptoView;
 
@@ -16,8 +16,9 @@ public class SellOrderController implements ControllerExecuteInterface {
     private final MenuCryptoView view;
     private final CryptoService cryptoService;
     private final UserWalletService wallet;
-    private SellOrderService sellOrder;
-    private UserSingleton user;
+    private final SellOrderService sellOrder;
+    private final UserSingleton user;
+    private final MatchOrderService match;
 
     public SellOrderController( MenuCryptoView view) {
         this.view = view;
@@ -25,6 +26,7 @@ public class SellOrderController implements ControllerExecuteInterface {
         this.sellOrder = new SellOrderService();
         this.user = UserSingleton.getInstance();
         this.wallet = new UserWalletService(user);
+        this.match = new MatchOrderService(view);
 
     }
 
@@ -35,14 +37,13 @@ public class SellOrderController implements ControllerExecuteInterface {
         {
 
         int id = user.getCurrentUser().getID();
+
         //de aqui Ver como mejorar esto(Crear clase autenticadora)
-        String Type = view.CryptoTypeView("crypto type:");
+        String Type = view.CryptoTypeView("Type of cryptocurrency from the following list:");
         String typeCrypto = Type.toUpperCase();
-        BigDecimal amount = view.getdataBigdecimal(" amount to sell: ");
-        BigDecimal maxPrice = view.getdataBigdecimal("minimum price ");
+        BigDecimal amount = view.getdataBigdecimal("Amount of cryptocurrencies to be sold: ");
+        BigDecimal maxPrice = view.getdataBigdecimal("Minimum price to sell: ");
         Cryptocurrencies crypto = cryptoService.getCryptocurrencies(typeCrypto);
-
-
 
         if(amount.compareTo(BigDecimal.ZERO) <= 0)
         {
@@ -60,13 +61,14 @@ public class SellOrderController implements ControllerExecuteInterface {
             view.showError("You don't have enough cryptocurrencies to sell");
             return;
         }
+
         sellOrder.placeSellOrder(id,typeCrypto, amount,maxPrice,wallet);
         view.showSuccessMessage("Sell Order created and placed");
+        match.MatchOrders();
         // hasta aqui
 
-
     } catch (Exception e){
-        view.showError("ERROR EN EL SELL");
+        view.showError("Cryptocurrencies are insufficient");
 
     }
 

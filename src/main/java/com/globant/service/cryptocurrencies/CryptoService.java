@@ -26,7 +26,7 @@ public class CryptoService {
         cryptocurrencieslist.put("BITCOIN", new Cryptocurrencies.Builder()
                 .setType("BTC")
                 .setPrice(new BigDecimal("4000"))
-                .setAmount(new BigDecimal("2"))
+                .setAmount(new BigDecimal("10"))
                 .build());
 
         cryptocurrencieslist.put("ETHEREUM", new Cryptocurrencies.Builder()

@@ -12,8 +12,7 @@ public class MenuCryptoController {
     private final BuyOrderController buyOrderController;
     private final SellOrderController sellOrderController;
 
-
-    public MenuCryptoController(/*ConsoleView*/ MenuCryptoView view) {
+    public MenuCryptoController(MenuCryptoView view) {
         this.view = view;
         this.depositController = new DepositController(view);
         this.showBalanceController = new ShowBalanceController(view);
