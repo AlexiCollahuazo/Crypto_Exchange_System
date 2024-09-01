@@ -15,7 +15,6 @@ public class MenuCryptoView {
     private static final String ANSI_BLUE = "\u001B[34m";
     private static final int INVALID_CHOICE = -1;
 
-
     public int MenuCryptoChoice() {
         final Scanner scanner = new Scanner(System.in);
         System.out.println("****************Welcome to Exchange Crypto********** :)");
@@ -44,9 +43,10 @@ public class MenuCryptoView {
     public BigDecimal DepositView() {
         try {
             System.out.print("Please state the amount you are going to deposit: ");
-            // String check = scanner.nextLine();
             BigDecimal money = scanner.nextBigDecimal();
+            scanner.nextLine();
             return money;
+
         } catch (InputMismatchException e) {
             scanner.nextLine();
            showError("Invalid Option, They have to be numbers");
@@ -58,17 +58,17 @@ public class MenuCryptoView {
 
     public String CryptoTypeView(String message)
     {
-        try {
+
             CryptoService cryptoService = new CryptoService();
             System.out.println(message);
             cryptoService.Infocryptos();
-            return scanner.nextLine();
-        }
-        catch (IllegalArgumentException e){
-        showError("Error");
-        return CryptoTypeView(message);
+            String type = scanner.nextLine();
+            if (type.isEmpty()){return CryptoTypeView(message);}
+            return  type;
+
+
     }
-    }
+
 
     public BigDecimal ExchangeAmountView(String message)
     {
@@ -84,12 +84,6 @@ public class MenuCryptoView {
         }
     }
 
-
-    public String getdataString(String message){
-        System.out.println(message);
-        return scanner.nextLine();
-    }
-
     public BigDecimal getdataBigdecimal(String message){
        try {
            System.out.println(message);
@@ -102,7 +96,6 @@ public class MenuCryptoView {
            scanner.nextLine();
            showError("Wrong number");
            return  getdataBigdecimal(message);
-
        }
 
     }
@@ -113,10 +106,6 @@ public class MenuCryptoView {
 
     public void showError(String errorMessage) {
         System.out.println(ANSI_RED + errorMessage + ANSI_RESET);
-    }
-
-    public void showInfo(String message) {
-        System.out.println(ANSI_BLUE + message + ANSI_RESET);
     }
 
     public void showSuccessMessage(String message) {

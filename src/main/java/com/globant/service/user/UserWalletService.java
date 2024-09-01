@@ -1,14 +1,15 @@
 package com.globant.service.user;
 
+import com.globant.model.user.User;
+import com.globant.model.user.UserSingleton;
 import com.globant.model.user.UserWallet;
 
-import java.lang.reflect.Type;
 import java.math.BigDecimal;
 import java.util.Map;
 
 public class UserWalletService {
 
-    private UserSingleton userSingleton;
+    private final UserSingleton userSingleton;
 
     public UserWalletService(UserSingleton userSingleton) {
            this.userSingleton = userSingleton;
@@ -21,10 +22,6 @@ public class UserWalletService {
 
     public Map<String, BigDecimal> getMycryptocurrencies() {
         return userSingleton.getCurrentWallet().getMycryptocurrencies();
-    }
-
-    public BigDecimal getMycryptocurrencies(String name) {
-        return userSingleton.getCurrentWallet().getMycryptocurrencies(name);
     }
 
 
@@ -44,6 +41,7 @@ public class UserWalletService {
     }
 
 
+
     public void addCrypto(String crypto, BigDecimal amount) {
         try {
 
@@ -60,8 +58,6 @@ public class UserWalletService {
         return wallet.getMycryptocurrencies().get(type).compareTo(Amount)>=0;
     }
 
-
-
     public void substractCrypto(String crypto, BigDecimal amount) {
         try {
             userSingleton.getCurrentWallet().substractCrypto(crypto, amount);
@@ -75,6 +71,7 @@ public class UserWalletService {
     public boolean checkbalance(UserWalletService wallet, BigDecimal totalAmount) {
         return wallet.getBalance().compareTo(totalAmount) >= 0;
     }
+
 
 
 

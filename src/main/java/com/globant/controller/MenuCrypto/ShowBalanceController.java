@@ -3,12 +3,12 @@ package com.globant.controller.MenuCrypto;
 import com.globant.controller.ControllerExecuteInterface;
 import com.globant.model.user.UserWallet;
 import com.globant.service.user.UnknownUserException;
-import com.globant.service.user.UserSingleton;
+import com.globant.model.user.UserSingleton;
 import com.globant.view.MenuCryptoView;
 
 public class ShowBalanceController implements ControllerExecuteInterface {
 
-    private MenuCryptoView view;
+    private final MenuCryptoView view;
 
     public ShowBalanceController(MenuCryptoView view) {
         this.view = view;

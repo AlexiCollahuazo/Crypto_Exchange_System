@@ -3,9 +3,8 @@ package com.globant.controller.MenuUser;
 import com.globant.controller.ControllerExecuteInterface;
 import com.globant.controller.MenuCrypto.MenuCryptoController;
 import com.globant.model.user.User;
-import com.globant.service.user.UserAuthenticationService;
 import com.globant.service.user.UnknownUserException;
-import com.globant.service.user.UserSingleton;
+import com.globant.model.user.UserSingleton;
 import com.globant.view.MenuUserView;
 import com.globant.view.MenuCryptoView;
 
@@ -28,8 +27,7 @@ public class LoginController implements ControllerExecuteInterface {
            String[] details = view.getLoginView();
             User user = userauthn.loginUser(details[0], details[1]);
             if (user != null) {
-
-                UserSingleton.getInstance().setCurrentUser(user);
+               // UserSingleton.getInstance().setCurrentUser(user);
                 view.showSuccessMessage("Login successful");
                 cryptocontroller.run();
             } else {

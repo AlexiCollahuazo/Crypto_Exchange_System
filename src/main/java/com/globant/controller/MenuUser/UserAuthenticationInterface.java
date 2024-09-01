@@ -1,4 +1,4 @@
-package com.globant.service.user;
+package com.globant.controller.MenuUser;
 
 import com.globant.model.user.User;
 

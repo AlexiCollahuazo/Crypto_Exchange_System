@@ -11,23 +11,19 @@ public class SellOrderService {
 
 
     private OrdersBook ordersBook;
+    private MatchOrderService matchorders1;
 
     public SellOrderService() {
         this.ordersBook = OrdersBook.getInstance();
     }
 
-    public void placeSellOrder(int userId, String Type, BigDecimal amount, BigDecimal maxPrice, UserWalletService wallet) {
-        BigDecimal totalCost = amount.multiply(maxPrice);
-        if (wallet.getBalance().compareTo(totalCost) >= 0) {
-            wallet.substractCrypto(Type,amount);// restando bitcoin, verificar esto.
-            ordersBook.placeBuyOrder(userId,Type,amount, maxPrice);
-        } else {
-            throw new IllegalArgumentException("You don't have enough money to place the sell order.");
-        }
+    public void placeSellOrder(int userId, String Type, BigDecimal amount, BigDecimal minPrice, UserWalletService wallet) {
+            Order order = new Order("Sell",userId,Type,amount, minPrice);
+            ordersBook.placeSellOrder(order);
     }
 
 
-    public Map<String, Order> getSellOrders() {
+    public Map<Integer, Order> getSellOrders() {
         return ordersBook.getSellOrders();
     }
 

@@ -3,7 +3,7 @@ package com.globant.controller.MenuCrypto;
 import com.globant.controller.ControllerExecuteInterface;
 import com.globant.model.cryptocurrencies.Cryptocurrencies;
 import com.globant.service.cryptocurrencies.CryptoService;
-import com.globant.service.user.UserSingleton;
+import com.globant.model.user.UserSingleton;
 import com.globant.service.user.UserWalletService;
 import com.globant.view.MenuCryptoView;
 
@@ -24,7 +24,6 @@ public class ExchangeController implements ControllerExecuteInterface {
     public void execute() {
         try
         {
-
             String Type = view.CryptoTypeView("Please enter a cryptocurrency from the following list:");
             String TypeExchange = Type.toUpperCase();
             BigDecimal ExchangeAmount = view.ExchangeAmountView("Enter the amount of cryptocurrencies you want");
@@ -36,7 +35,6 @@ public class ExchangeController implements ControllerExecuteInterface {
                 view.showError("Cannot be 0 or less than 0");
                 return;
             }
-
 
             if (crypto == null) {
                 view.showError("The cryptocurrency you are looking for is not listed");
@@ -58,7 +56,6 @@ public class ExchangeController implements ControllerExecuteInterface {
             };
 
             // hasta aqui
-
             wallet.withdraw(totalAmount);
             wallet.addCrypto(TypeExchange,ExchangeAmount);
             view.showSuccessMessage("Exchange registered of: " + ExchangeAmount +" "+ TypeExchange);

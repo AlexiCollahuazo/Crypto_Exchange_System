@@ -1,14 +1,14 @@
 package com.globant.model.orders;
 
-import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
 public class OrdersBook {
 
     private static OrdersBook instance;
-    private Map<String, Order> buyorders;
-    private Map<String, Order> sellorders;
+    private final Map<Integer, Order> buyorders;
+    private final Map< Integer, Order> sellorders;
+    private int IdOrder = 1;
 
     private OrdersBook()
     {
@@ -16,40 +16,34 @@ public class OrdersBook {
         sellorders = new HashMap<>();
     }
 
-
     public static OrdersBook getInstance() {
         if (instance == null) {
             instance = new OrdersBook();
         }
         return instance;
     }
-
-    public void placeBuyOrder(int userId,String cryptoType,BigDecimal amount, BigDecimal price) {
-        int orderId = generateOrderId();// revisar esto
-        Order order = new Order(userId,orderId, cryptoType,amount, price);
-        buyorders.put("BUY ORDER", order);
-
+    public void placeBuyOrder(Order order) {
+      buyorders.put(IdOrder++, order);
+    }
+    public void placeSellOrder(Order order) {
+        sellorders.put(IdOrder++, order);
     }
 
-    public void placeSellOrder(int userId,String cryptoType,BigDecimal amount, BigDecimal price) {
-        int orderId = generateOrderId();// revisar esto
-        Order order = new Order(userId,orderId, cryptoType,amount, price);
-        buyorders.put("SELL ORDER", order);
-    }
-
-    public Map<String, Order> getSellOrders() {
-        return sellorders;
-    }
-
-    public Map<String, Order> getBuyOrders() {
+    public Map<Integer, Order> getBuyOrders() {
         return buyorders;
     }
 
-
-    private int generateOrderId() {
-        return buyorders.size() + sellorders.size() + 1;
+    public Map<Integer, Order> getSellOrders() {
+        return sellorders;
     }
 
+    public void removeBuyOrder(int orderId) {
+        buyorders.remove(orderId);
+    }
+
+    public void removeSellOrder(int orderId) {
+        sellorders.remove(orderId);
+    }
 
 
 }
