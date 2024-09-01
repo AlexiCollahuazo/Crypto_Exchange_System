@@ -6,6 +6,8 @@ import com.globant.service.user.UnknownUserException;
 import com.globant.model.user.UserSingleton;
 import com.globant.view.MenuCryptoView;
 
+import java.math.BigDecimal;
+
 public class ShowBalanceController implements ControllerExecuteInterface {
 
     private final MenuCryptoView view;
@@ -18,6 +20,7 @@ public class ShowBalanceController implements ControllerExecuteInterface {
         try
         {
             UserWallet wallet = UserSingleton.getInstance().getCurrentWallet();
+            // revisar para que no salgan {}
             view.showMessage("Current Balance: " + wallet.getBalance());
             view.showMessage("Current Cryptocurrencies: " + wallet.getMycryptocurrencies());
 

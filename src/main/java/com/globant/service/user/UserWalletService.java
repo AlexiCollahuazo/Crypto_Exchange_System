@@ -15,7 +15,6 @@ public class UserWalletService {
            this.userSingleton = userSingleton;
     }
 
-
     public BigDecimal getBalance() {
         return userSingleton.getCurrentWallet().getBalance();
     }
@@ -23,7 +22,6 @@ public class UserWalletService {
     public Map<String, BigDecimal> getMycryptocurrencies() {
         return userSingleton.getCurrentWallet().getMycryptocurrencies();
     }
-
 
     public void withdraw(BigDecimal totalAmount) {
         try{
@@ -35,11 +33,9 @@ public class UserWalletService {
             System.out.println("Insufficient funds");
         }
     }
-
     public void deposit(BigDecimal amount) {
         userSingleton.getCurrentWallet().deposit(amount);
     }
-
 
 
     public void addCrypto(String crypto, BigDecimal amount) {
@@ -58,15 +54,30 @@ public class UserWalletService {
         return wallet.getMycryptocurrencies().get(type).compareTo(Amount)>=0;
     }
 
-    public void substractCrypto(String crypto, BigDecimal amount) {
+
+    public void UpdateMoneyWallet(User buyer, User seller, BigDecimal Total){
         try {
-            userSingleton.getCurrentWallet().substractCrypto(crypto, amount);
+            buyer.getWallet().withdraw(Total);
+            seller.getWallet().deposit(Total);
         }
         catch (Exception e){
-            System.out.println("Error subtracting crypto");
-
+            System.out.println("Error");
         }
     }
+
+    public void UpdateCryptoWallet(User buyer, User seller,String typeCrypto, BigDecimal amount){
+        try {
+
+            seller.getWallet().substractCrypto(typeCrypto, amount);
+            buyer.getWallet().addCrypto(typeCrypto, amount);
+        }
+        catch (Exception e){
+            System.out.println("Error");
+        }
+    }
+
+
+
 
     public boolean checkbalance(UserWalletService wallet, BigDecimal totalAmount) {
         return wallet.getBalance().compareTo(totalAmount) >= 0;

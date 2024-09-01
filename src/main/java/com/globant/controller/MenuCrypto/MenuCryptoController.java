@@ -1,6 +1,6 @@
 package com.globant.controller.MenuCrypto;
 
-import com.globant.service.Orders.SellOrderService;
+import com.globant.service.Orders.MatchOrderService;
 import com.globant.view.MenuCryptoView;
 
 public class MenuCryptoController {
@@ -11,6 +11,8 @@ public class MenuCryptoController {
     private final MenuCryptoView view;
     private final BuyOrderController buyOrderController;
     private final SellOrderController sellOrderController;
+    private  final ShowTransactionsController showTransactionsController;
+    private final MatchOrderService match;
 
     public MenuCryptoController(MenuCryptoView view) {
         this.view = view;
@@ -19,11 +21,17 @@ public class MenuCryptoController {
         this.exchangeController = new ExchangeController(view);
         this.buyOrderController = new BuyOrderController(view);
         this.sellOrderController = new SellOrderController(view);
+        this.showTransactionsController = new ShowTransactionsController(view);
+        this.match = new MatchOrderService(view);
     }
 
     public void run() {
+        match.MatchOrders(); // Revisar si aqui es correcto
+
+
         while (true) {
             int choice = view.MenuCryptoChoice();
+
             switch (choice) {
                 case 1:
                     depositController.execute();
@@ -48,6 +56,7 @@ public class MenuCryptoController {
                     break;
                 case 6:
                     // VIEW TRANSACTIONS
+                    showTransactionsController.execute();
 
                     break;
                 case 7:

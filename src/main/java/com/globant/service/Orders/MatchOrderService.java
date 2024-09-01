@@ -1,9 +1,12 @@
 package com.globant.service.Orders;
 
+import com.globant.model.Transactions.UserTransactions;
 import com.globant.model.orders.Order;
 import com.globant.model.orders.OrdersBook;
 import com.globant.model.user.User;
 import com.globant.model.user.UserSingleton;
+import com.globant.service.user.UserTransactionsService;
+import com.globant.service.user.UserWalletService;
 import com.globant.view.MenuCryptoView;
 
 import java.math.BigDecimal;
@@ -17,6 +20,8 @@ public class MatchOrderService {
     private final SellOrderService sellOrderService;
     private final OrdersBook ordersBook;
     private final UserSingleton user;
+    private final UserTransactionsService transactions;
+    private final UserWalletService wallet;
 
 
     public MatchOrderService(MenuCryptoView view) {
@@ -25,6 +30,8 @@ public class MatchOrderService {
         this.sellOrderService = new SellOrderService();
         this.user = UserSingleton.getInstance();
         this.ordersBook = OrdersBook.getInstance();
+        this.transactions = new UserTransactionsService();
+        this.wallet = new UserWalletService(user);
     }
     public void MatchOrders() {
         try
@@ -37,22 +44,42 @@ public class MatchOrderService {
                 for (Map.Entry<Integer, Order> sellEntry : sellOrders.entrySet()) {
                     Order sellOrder = sellEntry.getValue();
 
-
                     User buyer = user.getUserById(buyOrder.getUserId());
                     User seller =user.getUserById(sellOrder.getUserId());
                     BigDecimal Total = buyOrder.getMaxOrMinprice().min(sellOrder.getMaxOrMinprice());
-                    BigDecimal amountBuyOrder = buyOrder.getAmount();
-                    String typeBuyOrder = buyOrder.getCryptotype();
-                    BigDecimal amountSellOrder = sellOrder.getAmount();
-                    String typeSellOrder = sellOrder.getCryptotype();
+                    String typeOrderBuy = buyOrder.getOrdertype();
+                    String typeCryptoBuy = buyOrder.getCryptotype();
+
+                    String typeOrderSell = sellOrder.getOrdertype();
+
+                    String typeCrypto = buyOrder.getCryptotype();
+                    BigDecimal amount = buyOrder.getAmount();
+
+                    if (buyer.getWallet().getBalance().compareTo(Total) < 0) {
+                        view.showError("Match found but buyer does not have enough money");
+                        return; // Revisar esto o mejorar, s epuede poner en un metodo
+                    }
+
+                    BigDecimal sellerCryptoBalance = seller.getWallet().getMycryptocurrencies(sellOrder.getCryptotype());
+                    if (sellerCryptoBalance.compareTo(sellOrder.getAmount()) < 0) {
+                        view.showError("The seller is missing " + sellOrder.getCryptotype());
+                        return; // Revisar esto o mejorar
+                    }
+
+
+
+
+
                     boolean check = CheckingOrders(buyOrder, sellOrder);
                     if (check) {
-                        seller.getWallet().substractCrypto(typeSellOrder, amountSellOrder);
-                        buyer.getWallet().addCrypto(typeBuyOrder, amountBuyOrder);
 
-                        view.showSuccessMessage("Matching orders of: " + amountBuyOrder + " " + typeBuyOrder + " per " + Total);
-                        buyer.getWallet().withdraw(Total);
-                        seller.getWallet().deposit(Total);
+                        wallet.UpdateCryptoWallet(buyer,seller,typeCrypto,amount);
+                        view.showSuccessMessage("Matching orders of: " +amount + " " + typeCryptoBuy + " per " + Total);
+                        wallet.UpdateMoneyWallet(buyer,seller,Total);
+
+                        transactions.addTransactionsBuy(typeCrypto, amount,Total,typeOrderBuy,buyer);
+                        transactions.addTransactionsSell( typeCrypto, amount,Total,typeOrderSell,seller);
+
                         ordersBook.removeBuyOrder(buyEntry.getKey());
                         ordersBook.removeSellOrder(sellEntry.getKey());
                         return;
@@ -74,10 +101,4 @@ public class MatchOrderService {
                 && buyOrder.getAmount().compareTo(sellOrder.getAmount()) == 0
                 && buyOrder.getMaxOrMinprice().compareTo(sellOrder.getMaxOrMinprice()) >= 0;
     }
-
-
-
-
-
-
 }

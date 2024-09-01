@@ -30,7 +30,6 @@ public class SellOrderController implements ControllerExecuteInterface {
 
     }
 
-
     @Override
     public void execute() {
         try

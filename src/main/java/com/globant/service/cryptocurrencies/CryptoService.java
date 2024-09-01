@@ -37,7 +37,6 @@ public class CryptoService {
     }
 
 
-
     public Cryptocurrencies getCryptocurrencies(String name) {
         return cryptocurrencieslist.get(name.toUpperCase());
     }
