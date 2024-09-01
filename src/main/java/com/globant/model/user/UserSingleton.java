@@ -1,5 +1,7 @@
 package com.globant.model.user;
 
+import com.globant.model.Transactions.UserTransactions;
+
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -48,6 +50,7 @@ public class UserSingleton {
             this.currentWallet = null;
         }
     }
+
 
 
 }
