@@ -17,13 +17,15 @@ public class DepositController implements ControllerExecuteInterface {
     }
 
     public void execute() {
-        BigDecimal Amount = view.DepositView();
 
+        BigDecimal Amount = view.DepositView("Please state the amount you are going to deposit: ");
+        //Check that it is not 0
         if (Amount.compareTo(BigDecimal.ZERO) <= 0) {
             view.showError("The deposit cannot be 0 or less than 0");
             return;
         }
             try {
+            //   WalletService was used to deposit or obtain data
                 wallet.deposit(Amount);
                 view.showSuccessMessage("Your new wallet balance is: " + wallet.getBalance());
 

@@ -17,6 +17,7 @@ public class SellOrderService {
         this.ordersBook = OrdersBook.getInstance();
     }
 
+    // Create the sell order with the data received
     public void placeSellOrder(int userId, String Type, BigDecimal amount, BigDecimal minPrice, UserWalletService wallet) {
             Order order = new Order("Sell",userId,Type,amount, minPrice);
             ordersBook.placeSellOrder(order);

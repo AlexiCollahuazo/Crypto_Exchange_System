@@ -34,38 +34,34 @@ public class SellOrderController implements ControllerExecuteInterface {
     public void execute() {
         try
         {
-
+         // Call the views to get the data
         int id = user.getCurrentUser().getID();
-
-        //de aqui Ver como mejorar esto(Crear clase autenticadora)
         String Type = view.CryptoTypeView("Type of cryptocurrency from the following list:");
         String typeCrypto = Type.toUpperCase();
         BigDecimal amount = view.getdataBigdecimal("Amount of cryptocurrencies to be sold: ");
         BigDecimal maxPrice = view.getdataBigdecimal("Minimum price to sell: ");
         Cryptocurrencies crypto = cryptoService.getCryptocurrencies(typeCrypto);
 
+        // Customized messages for each error
         if(amount.compareTo(BigDecimal.ZERO) <= 0)
         {
             view.showError("Cannot be 0 or less than 0");
             return;
         }
-
         if (crypto == null) {
             view.showError("The cryptocurrency you are looking for is not listed");
             return;
         }
-
         if (!wallet.Checkcryptocurrencies(wallet,typeCrypto,amount))
         {
             view.showError("You don't have enough cryptocurrencies to sell");
             return;
         }
-
+        //If everything is correct, create the sell order
         sellOrder.placeSellOrder(id,typeCrypto, amount,maxPrice,wallet);
         view.showSuccessMessage("Sell Order created and placed");
+        // Once created, check if they match.
         match.MatchOrders();
-        // hasta aqui
-
     } catch (Exception e){
         view.showError("Cryptocurrencies are insufficient");
 

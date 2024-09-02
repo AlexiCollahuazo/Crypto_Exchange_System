@@ -34,13 +34,12 @@ public class BuyOrderController implements ControllerExecuteInterface {
         try
         {
             int id = user.getCurrentUser().getID();
-
-            //de aqui Ver como mejorar esto(Crear clase autenticadora)
             String Type = view.CryptoTypeView("Type of cryptocurrency from the following list: ");
             String typeCrypto = Type.toUpperCase();
             BigDecimal amount = view.getdataBigdecimal(" amount ");
             BigDecimal maxPrice = view.getdataBigdecimal("maximum price ");
             Cryptocurrencies crypto = cryptoService.getCryptocurrencies(typeCrypto);
+            // Customized messages for each error
             if(amount.compareTo(BigDecimal.ZERO) <= 0)
             {
                 view.showError("Cannot be 0 or less than 0");
@@ -56,16 +55,14 @@ public class BuyOrderController implements ControllerExecuteInterface {
                 view.showError("You don't have enough money to place the buy order.");
                 return;
             }
+            //If everything is correct, create the sell order
             buyOrder.placeBuyOrder(id,typeCrypto, amount,maxPrice,wallet);
-
             view.showSuccessMessage("Buy Order created and placed");
-            // hasta aqui
+            // Once created, check if they match.
            match.MatchOrders();
-
-
         } catch (Exception e)
         {
-            view.showError("ERROR EN EL BUY");
+            view.showError("Buy Error");
 
         }
     }

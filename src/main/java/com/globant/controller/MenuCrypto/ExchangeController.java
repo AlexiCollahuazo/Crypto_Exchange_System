@@ -20,16 +20,16 @@ public class ExchangeController implements ControllerExecuteInterface {
         this.wallet = new UserWalletService(UserSingleton.getInstance());
     }
 
-
     public void execute() {
         try
         {
+           // Calls the view to get the data,
             String Type = view.CryptoTypeView("Please enter a cryptocurrency from the following list:");
+           // transforms it into uppercase so there are no errors
             String TypeExchange = Type.toUpperCase();
             BigDecimal ExchangeAmount = view.ExchangeAmountView("Enter the amount of cryptocurrencies you want");
             Cryptocurrencies crypto = cryptoService.getCryptocurrencies(TypeExchange);
-
-            // De aqui. Ver como mejorar esto
+            // Customized messages for each error
             if(ExchangeAmount.compareTo(BigDecimal.ZERO) <= 0)
             {
                 view.showError("Cannot be 0 or less than 0");
@@ -40,7 +40,6 @@ public class ExchangeController implements ControllerExecuteInterface {
                 view.showError("The cryptocurrency you are looking for is not listed");
                 return;
             }
-
             BigDecimal totalAmount = crypto.getPrice().multiply(ExchangeAmount);
 
             if (!wallet.checkbalance(wallet,totalAmount))
@@ -54,8 +53,7 @@ public class ExchangeController implements ControllerExecuteInterface {
                 view.showError("There are not enough cryptocurrencies for sale, " + crypto.getAmount()+ " Left ");
                 return;
             };
-
-            // hasta aqui
+            // WalletService was used to deposit or obtain data
             wallet.withdraw(totalAmount);
             wallet.addCrypto(TypeExchange,ExchangeAmount);
             view.showSuccessMessage("Exchange registered of: " + ExchangeAmount +" "+ TypeExchange);

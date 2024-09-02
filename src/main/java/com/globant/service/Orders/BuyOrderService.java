@@ -16,7 +16,7 @@ public class BuyOrderService {
         this.ordersBook = OrdersBook.getInstance();
     }
 
-
+// Create the buy order with the data received
     public void placeBuyOrder( int userId,String Type, BigDecimal amount, BigDecimal maxPrice, UserWalletService wallet) {
         BigDecimal Balance = wallet.getBalance();
         if (Balance.compareTo(maxPrice) >= 0) {

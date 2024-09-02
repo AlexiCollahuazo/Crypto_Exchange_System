@@ -38,48 +38,51 @@ public class MatchOrderService {
         {
             Map< Integer, Order> buyOrders = buyOrderService.getBuyOrders();
             Map< Integer, Order> sellOrders = sellOrderService.getSellOrders();
-
+            //Search the orders to match
             for (Map.Entry<Integer, Order> buyEntry : buyOrders.entrySet()) {
                 Order buyOrder = buyEntry.getValue();
                 for (Map.Entry<Integer, Order> sellEntry : sellOrders.entrySet()) {
                     Order sellOrder = sellEntry.getValue();
 
+                    //Obtain the user to whom the order belongs
                     User buyer = user.getUserById(buyOrder.getUserId());
                     User seller =user.getUserById(sellOrder.getUserId());
-                    BigDecimal Total = buyOrder.getMaxOrMinprice().min(sellOrder.getMaxOrMinprice());
-                    String typeOrderBuy = buyOrder.getOrdertype();
-                    String typeCryptoBuy = buyOrder.getCryptotype();
+                    String buyerName = buyer.getName();
+                    String sellerName = seller.getName();
 
-                    String typeOrderSell = sellOrder.getOrdertype();
-
+                   // Creating variables
                     String typeCrypto = buyOrder.getCryptotype();
                     BigDecimal amount = buyOrder.getAmount();
+                    BigDecimal Total = buyOrder.getMaxOrMinprice().min(sellOrder.getMaxOrMinprice());
+                    //Creating BUY Order Variables
+                    String typeOrderBuy = buyOrder.getOrdertype();
+                    String typeCryptoBuy = buyOrder.getCryptotype();
+                    BigDecimal buyerBalance = buyer.getWallet().getBalance();
+                    //Creating SELL Order Variables
+                    String typeOrderSell = sellOrder.getOrdertype();
+                    BigDecimal sellerCryptoBalance = seller.getWallet().getMycryptocurrencies(typeCrypto);
 
-                    if (buyer.getWallet().getBalance().compareTo(Total) < 0) {
-                        view.showError("Match found but buyer does not have enough money");
-                        return; // Revisar esto o mejorar, s epuede poner en un metodo
+                    //It ensures that when making a match the balance does not become negative
+                    if (buyerBalance.compareTo(Total) < 0) {
+                        view.showError("Match found but buyer: "+ buyerName+ " does not have enough money");
+                        return;
                     }
-
-                    BigDecimal sellerCryptoBalance = seller.getWallet().getMycryptocurrencies(sellOrder.getCryptotype());
-                    if (sellerCryptoBalance.compareTo(sellOrder.getAmount()) < 0) {
-                        view.showError("The seller is missing " + sellOrder.getCryptotype());
-                        return; // Revisar esto o mejorar
+                    //It ensures that when making a match the crypto amount does not become negative
+                    if (sellerCryptoBalance.compareTo(amount) < 0) {
+                        view.showError("The seller: " + sellerName +" don't have enough: " + typeCrypto);
+                        return;
                     }
-
-
-
-
-
+                    //Ensures that orders comply with the proposed conditions
                     boolean check = CheckingOrders(buyOrder, sellOrder);
                     if (check) {
-
+                        //Wallet is updated through WalletService methods
                         wallet.UpdateCryptoWallet(buyer,seller,typeCrypto,amount);
                         view.showSuccessMessage("Matching orders of: " +amount + " " + typeCryptoBuy + " per " + Total);
                         wallet.UpdateMoneyWallet(buyer,seller,Total);
-
+                        //Transactions are created through UserTransactionService methods
                         transactions.addTransactionsBuy(typeCrypto, amount,Total,typeOrderBuy,buyer);
                         transactions.addTransactionsSell( typeCrypto, amount,Total,typeOrderSell,seller);
-
+                        // Orders are removed
                         ordersBook.removeBuyOrder(buyEntry.getKey());
                         ordersBook.removeSellOrder(sellEntry.getKey());
                         return;
@@ -95,7 +98,7 @@ public class MatchOrderService {
     }
 
 
-// Aqui van las condiciones que vamos a utilizar
+// Here are the conditions we are going to use
     private boolean CheckingOrders(Order buyOrder, Order sellOrder) {
         return buyOrder.getCryptotype().equals(sellOrder.getCryptotype())
                 && buyOrder.getAmount().compareTo(sellOrder.getAmount()) == 0
