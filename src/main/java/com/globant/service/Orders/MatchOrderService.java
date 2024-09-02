@@ -46,11 +46,11 @@ public class MatchOrderService {
 
                     //Obtain the user to whom the order belongs
                     User buyer = user.getUserById(buyOrder.getUserId());
-                    User seller =user.getUserById(sellOrder.getUserId());
+                    User seller = user.getUserById(sellOrder.getUserId());
                     String buyerName = buyer.getName();
                     String sellerName = seller.getName();
 
-                   // Creating variables
+                    // Creating variables
                     String typeCrypto = buyOrder.getCryptotype();
                     BigDecimal amount = buyOrder.getAmount();
                     BigDecimal Total = buyOrder.getMaxOrMinprice().min(sellOrder.getMaxOrMinprice());
@@ -62,30 +62,27 @@ public class MatchOrderService {
                     String typeOrderSell = sellOrder.getOrdertype();
                     BigDecimal sellerCryptoBalance = seller.getWallet().getMycryptocurrencies(typeCrypto);
 
-                    //It ensures that when making a match the balance does not become negative
-                    if (buyerBalance.compareTo(Total) < 0) {
-                        view.showError("Match found but buyer: "+ buyerName+ " does not have enough money");
-                        return;
-                    }
-                    //It ensures that when making a match the crypto amount does not become negative
-                    if (sellerCryptoBalance.compareTo(amount) < 0) {
-                        view.showError("The seller: " + sellerName +" don't have enough: " + typeCrypto);
-                        return;
-                    }
+                    /* when making a match the crypto amount doesn't become negative
+                     and  the balance doesn't become negative*/
+                    if (buyerBalance.compareTo(Total) >= 0 && sellerCryptoBalance.compareTo(amount) >= 0) {
+
                     //Ensures that orders comply with the proposed conditions
                     boolean check = CheckingOrders(buyOrder, sellOrder);
                     if (check) {
                         //Wallet is updated through WalletService methods
-                        wallet.UpdateCryptoWallet(buyer,seller,typeCrypto,amount);
-                        view.showSuccessMessage("Matching orders of: " +amount + " " + typeCryptoBuy + " per " + Total);
-                        wallet.UpdateMoneyWallet(buyer,seller,Total);
+                        wallet.UpdateCryptoWallet(buyer, seller, typeCrypto, amount);
+                        view.showSuccessMessage("Matching orders of: " + amount + " " + typeCryptoBuy + " per " + Total);
+                        wallet.UpdateMoneyWallet(buyer, seller, Total);
                         //Transactions are created through UserTransactionService methods
-                        transactions.addTransactionsBuy(typeCrypto, amount,Total,typeOrderBuy,buyer);
-                        transactions.addTransactionsSell( typeCrypto, amount,Total,typeOrderSell,seller);
+                        transactions.addTransactionsBuy(typeCrypto, amount, Total, typeOrderBuy, buyer);
+                        transactions.addTransactionsSell(typeCrypto, amount, Total, typeOrderSell, seller);
                         // Orders are removed
                         ordersBook.removeBuyOrder(buyEntry.getKey());
                         ordersBook.removeSellOrder(sellEntry.getKey());
                         return;
+                    }
+                    }else{
+                        view.showError("An error occurred due to insufficient funds from the buyer or seller");
                     }
                 }
             }

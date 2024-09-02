@@ -2,6 +2,7 @@ package com.globant.controller.MenuCrypto;
 
 import com.globant.controller.ControllerExecuteInterface;
 import com.globant.model.cryptocurrencies.Cryptocurrencies;
+import com.globant.service.Orders.MatchOrderService;
 import com.globant.service.cryptocurrencies.CryptoService;
 import com.globant.model.user.UserSingleton;
 import com.globant.service.user.UserWalletService;
@@ -13,11 +14,13 @@ public class ExchangeController implements ControllerExecuteInterface {
     private final CryptoService cryptoService;
     private final UserWalletService wallet;
     private final MenuCryptoView view;
+    private final MatchOrderService match;
 
     public ExchangeController( MenuCryptoView view) {
         this.view = view;
         this.cryptoService = CryptoService.getInstance();
         this.wallet = new UserWalletService(UserSingleton.getInstance());
+        this.match = new MatchOrderService(view);
     }
 
     public void execute() {
@@ -57,6 +60,7 @@ public class ExchangeController implements ControllerExecuteInterface {
             wallet.withdraw(totalAmount);
             wallet.addCrypto(TypeExchange,ExchangeAmount);
             view.showSuccessMessage("Exchange registered of: " + ExchangeAmount +" "+ TypeExchange);
+            match.MatchOrders();
 
         } catch (Exception e)
         {

@@ -33,6 +33,7 @@ public class BuyOrderController implements ControllerExecuteInterface {
     public void execute() {
         try
         {
+            match.MatchOrders();
             int id = user.getCurrentUser().getID();
             String Type = view.CryptoTypeView("Type of cryptocurrency from the following list: ");
             String typeCrypto = Type.toUpperCase();

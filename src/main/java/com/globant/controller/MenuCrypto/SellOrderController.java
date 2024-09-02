@@ -34,6 +34,7 @@ public class SellOrderController implements ControllerExecuteInterface {
     public void execute() {
         try
         {
+            match.MatchOrders();
          // Call the views to get the data
         int id = user.getCurrentUser().getID();
         String Type = view.CryptoTypeView("Type of cryptocurrency from the following list:");
