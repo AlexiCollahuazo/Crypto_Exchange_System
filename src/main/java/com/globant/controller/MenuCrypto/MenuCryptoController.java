@@ -28,7 +28,6 @@ public class MenuCryptoController {
     public void run() {
         match.MatchOrders(); // Revisar si aqui es correcto
 
-
         while (true) {
             int choice = view.MenuCryptoChoice();
 
@@ -42,14 +41,11 @@ public class MenuCryptoController {
                 case 3:
                     // EXCHANGE
                     exchangeController.execute();
-
                     break;
-
                 case 4:
                     // BUY ORDER
                     buyOrderController.execute();
                     break;
-
                 case 5:
                     // SELL ORDER
                     sellOrderController.execute();
@@ -57,7 +53,6 @@ public class MenuCryptoController {
                 case 6:
                     // VIEW TRANSACTIONS
                     showTransactionsController.execute();
-
                     break;
                 case 7:
                     view.showLogoutMessage("GoodBye :,(");

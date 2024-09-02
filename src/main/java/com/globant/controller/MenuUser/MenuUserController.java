@@ -1,5 +1,6 @@
 package com.globant.controller.MenuUser;
 
+import com.globant.service.cryptocurrencies.Cryptocurrencyfluctuation;
 import com.globant.view.MenuUserView;
 
 public class MenuUserController {
@@ -17,6 +18,8 @@ public class MenuUserController {
     }
 
     public void run() {
+
+
         while (active) {
             int choice = view.MenuUserChoice();
             switch (choice) {

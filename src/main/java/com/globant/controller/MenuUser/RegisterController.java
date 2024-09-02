@@ -7,8 +7,8 @@ import com.globant.model.user.UserSingleton;
 import com.globant.view.MenuUserView;
 
  public class RegisterController implements ControllerExecuteInterface {
-    private final MenuUserView view;
-   private final UserAuthenticationService userauthn;
+     private final MenuUserView view;
+     private final UserAuthenticationService userauthn;//
 
      public RegisterController(MenuUserView view, UserAuthenticationService userAuthenticationService) {
          this.view = view;
@@ -16,13 +16,15 @@ import com.globant.view.MenuUserView;
      }
 
      public void execute() {
+        //  Call the view to get data
          String[] details = view.getRegisterView();
-         for (String detail : details) {
-             if (detail.isEmpty()) {
-                 view.showError("There can be no empty spaces");
-                 return;
-             }
+         //No blank spaces
+         boolean Check = userauthn.CheckEmpty(details);
+         if(Check){
+             view.showError("There can be no empty spaces");
+             return;
          }
+         // Register the user after verifying email
          try {
              if (userauthn.VerifyEmail(details[1])) {
                  view.showError("Email Registered, Try another One");
@@ -35,12 +37,8 @@ import com.globant.view.MenuUserView;
              }
          } catch (UnknownUserException e) {
              view.showError("Error in registration");
-
          }
-
-
          }
-
      }
 
 

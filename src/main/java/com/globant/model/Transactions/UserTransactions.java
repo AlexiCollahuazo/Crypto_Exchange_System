@@ -17,13 +17,13 @@ public class UserTransactions {
         this.orderType = orderType;
     }
 
-
+// method to view user transactions
     @Override
     public String toString() {
         return "Transaction: " +
-                "Type='" + cryptoType + '\'' +
-                ", amount=" + amount +
-                ", price=" + price +
-                ", orderType='" + orderType + '\'';
+                " Cryptocurrency type= " + cryptoType  +
+                ", Amount= " + amount +
+                ", Price= " + price +
+                ", orderType= " + orderType;
     }
 }

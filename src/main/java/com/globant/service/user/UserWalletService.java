@@ -9,12 +9,12 @@ import java.util.Map;
 
 public class UserWalletService {
 
-    private final UserSingleton userSingleton;
+    private final UserSingleton userSingleton; //Calls the instance where the Users are stored
 
     public UserWalletService(UserSingleton userSingleton) {
            this.userSingleton = userSingleton;
     }
-
+   // Methods to facilitate obtaining wallet data or changing wallet data
     public BigDecimal getBalance() {
         return userSingleton.getCurrentWallet().getBalance();
     }
@@ -48,12 +48,10 @@ public class UserWalletService {
 
         }
     }
-
     public boolean Checkcryptocurrencies(UserWalletService wallet, String type, BigDecimal Amount) {
 
         return wallet.getMycryptocurrencies().get(type).compareTo(Amount)>=0;
     }
-
 
     public void UpdateMoneyWallet(User buyer, User seller, BigDecimal Total){
         try {
@@ -75,9 +73,6 @@ public class UserWalletService {
             System.out.println("Error");
         }
     }
-
-
-
 
     public boolean checkbalance(UserWalletService wallet, BigDecimal totalAmount) {
         return wallet.getBalance().compareTo(totalAmount) >= 0;

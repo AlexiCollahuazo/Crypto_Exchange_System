@@ -22,6 +22,7 @@ public class OrdersBook {
         }
         return instance;
     }
+
     public void placeBuyOrder(Order order) {
       buyorders.put(IdOrder++, order);
     }

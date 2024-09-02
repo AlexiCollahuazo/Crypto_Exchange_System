@@ -13,12 +13,14 @@ public class UserAuthenticationService implements UserAuthenticationInterface {
         users = new HashMap<>();
     }
 
+    // Add the user to UserSingleton
     @Override
     public void registerUser(User user) {
         users.put(user.getEmail(), user);
         UserSingleton.getInstance().addUser(user);
     }
 
+   // Checks the username and password, if they do not exist then null is returned
     @Override
     public User loginUser(String email, String password) {
         User user = users.get(email);
@@ -29,9 +31,21 @@ public class UserAuthenticationService implements UserAuthenticationInterface {
         return null;
     }
 
-
+    // Validates the user's email provided with saved user emails
 @Override
     public boolean VerifyEmail(String email) {
         return users.containsKey(email);
     }
+
+ //   Method to avoid white spaces
+    public boolean CheckEmpty(String[] details) {
+        for (String detail : details) {
+            if (detail.isEmpty()) {
+                return true;
+            }
+        }
+        return  false;
+    }
+
 }
+

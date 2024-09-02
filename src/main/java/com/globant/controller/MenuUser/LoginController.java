@@ -24,12 +24,13 @@ public class LoginController implements ControllerExecuteInterface {
 
     public void execute() {
         try {
+           // receive the data
            String[] details = view.getLoginView();
+           // authenticates that the user exists
             User user = userauthn.loginUser(details[0], details[1]);
             if (user != null) {
-               // UserSingleton.getInstance().setCurrentUser(user);
                 view.showSuccessMessage("Login successful");
-                cryptocontroller.run();
+                cryptocontroller.run(); // activate the other menu
             } else {
                 view.showError("Incorrect email or password, please try again");
             }

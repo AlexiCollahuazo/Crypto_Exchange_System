@@ -14,7 +14,7 @@ public class UserTransactionsService {
     public UserTransactionsService() {
     }
 
-
+// Method responsible for adding transactions to the User who made a match with an BuyOrder
     public void addTransactionsBuy(String typeCryptoBuy, BigDecimal amountBuyOrder, BigDecimal Total
             , String typeOrderBuy, User buyer) {
 
@@ -22,7 +22,7 @@ public class UserTransactionsService {
                 amountBuyOrder, Total, typeOrderBuy);
         buyer.getTransactions().addTransactions(buyTransaction);
     }
-
+    // Method responsible for adding transactions to the User who made a match with an SellOrder
     public void addTransactionsSell(String typeCryptoSell, BigDecimal amountSellOrder, BigDecimal Total
             , String typeOrderSell, User seller) {
 

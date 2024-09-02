@@ -7,11 +7,10 @@ public class GlobalTransactions {
     private Map<Integer, UserTransactions> transactions;
     private int transactionsId = 1;
 
-
+   // All transactions are saved here
     public GlobalTransactions() {
         this.transactions = new HashMap<>();
     }
-
 
     public void addTransactions(UserTransactions transaction) {
         transactions.put(transactionsId++, transaction);

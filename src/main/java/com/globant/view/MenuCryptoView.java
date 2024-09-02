@@ -40,9 +40,9 @@ public class MenuCryptoView {
     }
 
 
-    public BigDecimal DepositView() {
+    public BigDecimal DepositView(String message) {
         try {
-            System.out.print("Please state the amount you are going to deposit: ");
+            System.out.print(message);
             BigDecimal money = scanner.nextBigDecimal();
             scanner.nextLine();
             return money;
@@ -50,7 +50,7 @@ public class MenuCryptoView {
         } catch (InputMismatchException e) {
             scanner.nextLine();
            showError("Invalid Option, They have to be numbers");
-            return DepositView();
+            return DepositView(message);
 
         }
     }
@@ -59,14 +59,12 @@ public class MenuCryptoView {
     public String CryptoTypeView(String message)
     {
 
-            CryptoService cryptoService = new CryptoService();
+            CryptoService cryptoService = CryptoService.getInstance(); // Receive the instance of the cryptos
             System.out.println(message);
-            cryptoService.Infocryptos();
+            cryptoService.Infocryptos();// Show the prices
             String type = scanner.nextLine();
             if (type.isEmpty()){return CryptoTypeView(message);}
             return  type;
-
-
     }
 
 
