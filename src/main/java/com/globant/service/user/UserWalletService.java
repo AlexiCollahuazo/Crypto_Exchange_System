@@ -8,9 +8,7 @@ import java.math.BigDecimal;
 import java.util.Map;
 
 public class UserWalletService {
-
     private final UserSingleton userSingleton; //Calls the instance where the Users are stored
-
     public UserWalletService(UserSingleton userSingleton) {
            this.userSingleton = userSingleton;
     }
@@ -77,8 +75,4 @@ public class UserWalletService {
     public boolean checkbalance(UserWalletService wallet, BigDecimal totalAmount) {
         return wallet.getBalance().compareTo(totalAmount) >= 0;
     }
-
-
-
-
 }

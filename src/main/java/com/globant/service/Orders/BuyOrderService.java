@@ -26,7 +26,6 @@ public class BuyOrderService {
             throw new IllegalArgumentException("You don't have enough money to place the buy order");
         }
     }
-
     public Map<Integer, Order> getBuyOrders() {
         return ordersBook.getBuyOrders();
     }

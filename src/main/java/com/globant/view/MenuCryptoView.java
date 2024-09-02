@@ -38,7 +38,6 @@ public class MenuCryptoView {
         }
     }
 
-
     public BigDecimal DepositView(String message) {
         try {
             System.out.print(message);
@@ -50,14 +49,11 @@ public class MenuCryptoView {
             scanner.nextLine();
            showError("Invalid Option, They have to be numbers");
             return DepositView(message);
-
         }
     }
 
-
     public String CryptoTypeView(String message)
     {
-
             CryptoService cryptoService = CryptoService.getInstance(); // Receive the instance of the cryptos
             System.out.println(message);
             cryptoService.Infocryptos();// Show the prices
@@ -65,7 +61,6 @@ public class MenuCryptoView {
             if (type.isEmpty()){return CryptoTypeView(message);}
             return  type;
     }
-
 
     public BigDecimal ExchangeAmountView(String message)
     {
@@ -96,7 +91,6 @@ public class MenuCryptoView {
        }
 
     }
-
     public void showLogoutMessage(String Message) {
         System.out.println(ANSI_RED + Message + ANSI_RESET);
     }

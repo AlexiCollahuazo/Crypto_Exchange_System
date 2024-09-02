@@ -8,12 +8,8 @@ import com.globant.model.user.User;
 import java.math.BigDecimal;
 
 public class UserTransactionsService {
-
-
-
     public UserTransactionsService() {
     }
-
 // Method responsible for adding transactions to the User who made a match with an BuyOrder
     public void addTransactionsBuy(String typeCryptoBuy, BigDecimal amountBuyOrder, BigDecimal Total
             , String typeOrderBuy, User buyer) {

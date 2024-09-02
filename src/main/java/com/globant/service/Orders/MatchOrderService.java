@@ -15,14 +15,12 @@ import java.util.Map;
 public class MatchOrderService {
 
     private final MenuCryptoView view;
-
     private final BuyOrderService buyOrderService;
     private final SellOrderService sellOrderService;
     private final OrdersBook ordersBook;
     private final UserSingleton user;
     private final UserTransactionsService transactions;
     private final UserWalletService wallet;
-
 
     public MatchOrderService(MenuCryptoView view) {
         this.view = view;
@@ -93,8 +91,6 @@ public class MatchOrderService {
 
         }
     }
-
-
 // Here are the conditions we are going to use
     private boolean CheckingOrders(Order buyOrder, Order sellOrder) {
         return buyOrder.getCryptotype().equals(sellOrder.getCryptotype())
