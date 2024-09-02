@@ -14,8 +14,6 @@ public class LoginController implements ControllerExecuteInterface {
     private final MenuCryptoController cryptocontroller;
     private  MenuCryptoView viewCrypto = new MenuCryptoView();//
 
-
-
     public LoginController(MenuUserView view, UserAuthenticationService userauthn) {
         this.view = view;
         this.userauthn = userauthn;

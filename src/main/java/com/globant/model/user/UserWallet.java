@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class UserWallet {
     private BigDecimal Balance;
-    private Map<String, BigDecimal> mycryptocurrencies;
+    private final Map<String, BigDecimal> mycryptocurrencies;
 
     public UserWallet() {
         this.Balance = BigDecimal.ZERO;
@@ -33,7 +33,6 @@ public class UserWallet {
             Balance = Balance.subtract(amount);
 
     }
-
 
     public void deposit(BigDecimal amount) {
             this.Balance = Balance.add(amount);

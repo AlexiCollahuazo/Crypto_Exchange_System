@@ -16,7 +16,6 @@ public class Cryptocurrencies {
     public String getType() {
         return type;
     }
-
     public BigDecimal getPrice() {
         return price;
     }
@@ -36,7 +35,6 @@ public class Cryptocurrencies {
     public void setAmount(BigDecimal amount) {
         Amount = amount;
     }
-
 
 
     public static class Builder {

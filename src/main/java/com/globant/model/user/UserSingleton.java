@@ -15,7 +15,7 @@ public class UserSingleton {
     public UserSingleton() {
 
     }
-// Syncronized se puso para cuando se comparten los datos.
+// Synchronized was set for when data is shared.
     public static synchronized UserSingleton getInstance() {
         if (instance == null) {
             instance = new UserSingleton();

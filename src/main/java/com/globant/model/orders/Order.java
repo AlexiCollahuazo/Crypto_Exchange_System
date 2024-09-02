@@ -3,11 +3,11 @@ package com.globant.model.orders;
 import java.math.BigDecimal;
 
 public class Order {
-    private String ordertype;
-    private int userId;
-    private String cryptotype;
-    private BigDecimal amount;
-    private BigDecimal MaxOrMinprice;
+    private final String ordertype;
+    private final int userId;
+    private final String cryptotype;
+    private final BigDecimal amount;
+    private final BigDecimal MaxOrMinprice;
 
 
     public Order(String ordertype,int userId, String cryptotype,BigDecimal amount, BigDecimal maxOrMinprice) {

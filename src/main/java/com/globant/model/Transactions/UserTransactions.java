@@ -3,8 +3,6 @@ package com.globant.model.Transactions;
 import java.math.BigDecimal;
 
 public class UserTransactions {
-
-
     private final String cryptoType;
     private final BigDecimal amount;
     private final BigDecimal price;

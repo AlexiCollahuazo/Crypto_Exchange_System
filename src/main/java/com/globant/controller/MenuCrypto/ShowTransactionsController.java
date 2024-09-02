@@ -9,8 +9,8 @@ import com.globant.view.MenuCryptoView;
 import java.util.Map;
 
 public class ShowTransactionsController implements ControllerExecuteInterface {
-    private UserSingleton userSingleton;
-    private MenuCryptoView view;
+    private final UserSingleton userSingleton;
+    private final MenuCryptoView view;
    //Calls the instance where users are stored
     public ShowTransactionsController(MenuCryptoView view) {
         this.userSingleton = UserSingleton.getInstance();

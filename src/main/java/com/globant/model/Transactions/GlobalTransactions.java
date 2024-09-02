@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class GlobalTransactions {
-    private Map<Integer, UserTransactions> transactions;
+    private final Map<Integer, UserTransactions> transactions;
     private int transactionsId = 1;
 
    // All transactions are saved here

@@ -44,11 +44,6 @@ public class CryptoService {
         return cryptocurrencieslist.get(name.toUpperCase());
     }
 
-    public Cryptocurrencies getCryptocurrencies(BigDecimal price) {
-        return cryptocurrencieslist.get(price);
-    }
-
-
     public boolean withdrawCryptos(String type, BigDecimal Amount) {
 
         Cryptocurrencies crypto = cryptocurrencieslist.get(type.toUpperCase());
@@ -58,7 +53,6 @@ public class CryptoService {
         }
         return false;
     }
-
 
     public Map<String, Cryptocurrencies> getCryptocurrencieslist() {
         return cryptocurrencieslist;
@@ -78,7 +72,7 @@ public class CryptoService {
 
                 // fluctuate.nextdouble gives values between 0 and 1 *0.10 p
                 //goes up or down by 3 percent, From 2 to 5 percent is how they usually change, so I put 3
-                BigDecimal fluctuation = new BigDecimal((fluctuate.nextDouble() * 0.10) - 0.05);
+                BigDecimal fluctuation = new BigDecimal((fluctuate.nextDouble() * 0.10) - 0.03);
                 BigDecimal actualPrice = crypto.getPrice(); //Get the price of the actual cryptocurrencies
                 BigDecimal Price = actualPrice.add(actualPrice.multiply(fluctuation));
                 // HALF UP, will round to only 2 decimal places in the bigdecimal.
