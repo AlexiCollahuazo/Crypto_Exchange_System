@@ -14,13 +14,11 @@ public class ExchangeController implements ControllerExecuteInterface {
     private final CryptoService cryptoService;
     private final UserWalletService wallet;
     private final MenuCryptoView view;
-    private final MatchOrderService match;
 
     public ExchangeController( MenuCryptoView view) {
         this.view = view;
         this.cryptoService = CryptoService.getInstance();
         this.wallet = new UserWalletService(UserSingleton.getInstance());
-        this.match = new MatchOrderService(view);
     }
 
     public void execute() {
@@ -60,7 +58,6 @@ public class ExchangeController implements ControllerExecuteInterface {
             wallet.withdraw(totalAmount);
             wallet.addCrypto(TypeExchange,ExchangeAmount);
             view.showSuccessMessage("Exchange registered of: " + ExchangeAmount +" "+ TypeExchange);
-            match.MatchOrders();
 
         } catch (Exception e)
         {

@@ -69,7 +69,9 @@ public class MatchOrderService {
                     if (check) {
                         //Wallet is updated through WalletService methods
                         wallet.UpdateCryptoWallet(buyer, seller, typeCrypto, amount);
-                        view.showSuccessMessage("Matching orders of: " + amount + " " + typeCryptoBuy + " per " + Total);
+                        view.showSuccessMessage("Matching orders between " + buyerName+ " and " + sellerName + " of "+
+                                amount + " " + typeCryptoBuy + " per " + Total);
+
                         wallet.UpdateMoneyWallet(buyer, seller, Total);
                         //Transactions are created through UserTransactionService methods
                         transactions.addTransactionsBuy(typeCrypto, amount, Total, typeOrderBuy, buyer);
@@ -80,7 +82,8 @@ public class MatchOrderService {
                         return;
                     }
                     }else{
-                        view.showError("An error occurred due to insufficient funds from the buyer or seller");
+                        view.showError("An error occurred in the exchange between buyer:" +
+                                buyerName + " and seller:" + sellerName);
                     }
                 }
             }

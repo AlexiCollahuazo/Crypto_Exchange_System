@@ -12,11 +12,9 @@ import java.math.BigDecimal;
 public class DepositController implements ControllerExecuteInterface {
     private final UserWalletService wallet;
     private final MenuCryptoView view;
-    private final MatchOrderService match;
     public DepositController( MenuCryptoView view) {
         this.view = view;
         this.wallet = new UserWalletService(UserSingleton.getInstance());
-        this.match = new MatchOrderService(view);
     }
 
     public void execute() {
@@ -31,7 +29,6 @@ public class DepositController implements ControllerExecuteInterface {
             //   WalletService was used to deposit or obtain data
                 wallet.deposit(Amount);
                 view.showSuccessMessage("Your new wallet balance is: " + wallet.getBalance());
-                match.MatchOrders();
 
             } catch (UnknownUserException e) {
                 view.showError("Deposit error");

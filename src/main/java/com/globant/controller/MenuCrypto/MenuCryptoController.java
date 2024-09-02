@@ -24,8 +24,7 @@ public class MenuCryptoController {
     }
 
     public void run() {
-        match.MatchOrders(); // Revisar si aqui es correcto
-
+        match.MatchOrders();
         while (true) {
             int choice = view.MenuCryptoChoice();
 
